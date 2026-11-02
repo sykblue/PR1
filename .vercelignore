@@ -1,0 +1,15 @@
+# Upload only what the web app needs. Never upload secrets, local DBs, datasets or large local models.
+/*
+!app.py
+!requirements.txt
+!vercel.json
+!*.html
+!services/
+!static/
+!templates/
+!data/
+data/*
+!data/clinics-*.json
+!models/
+models/*
+!models/hair_segmenter.tflite

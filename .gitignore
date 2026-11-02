@@ -23,3 +23,6 @@ models/scalp-classifier/
 탈모 데이터셋/
 data/*.sqlite*
 data/.session_secret
+
+# Hair segmentation model (MediaPipe, Apache-2.0) is small and needed for deployments.
+!models/hair_segmenter.tflite

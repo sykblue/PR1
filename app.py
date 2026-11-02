@@ -29,7 +29,19 @@ from services.vision_training import VisionTraining
 from services.scalp_classifier import ScalpClassifier
 
 ROOT = Path(__file__).resolve().parent
-os.environ.setdefault("MPLCONFIGDIR", str(ROOT / ".cache" / "matplotlib"))
+# Vercel functions can only write to /tmp, and that copy is lost when the instance stops.
+ON_VERCEL = bool(os.getenv("VERCEL"))
+DATA_DIR = Path(os.getenv("DATA_DIR") or ("/tmp/hairline-data" if ON_VERCEL else ROOT / "data"))
+os.environ.setdefault("MPLCONFIGDIR", str((Path("/tmp") if ON_VERCEL else ROOT / ".cache") / "matplotlib"))
+
+
+def allowed_hosts():
+    hosts = {"127.0.0.1", "localhost"}
+    hosts.update(h.strip().lower() for h in os.getenv("ALLOWED_HOSTS", "").split(",") if h.strip())
+    for name in ("VERCEL_URL", "VERCEL_BRANCH_URL", "VERCEL_PROJECT_PRODUCTION_URL"):
+        if os.getenv(name):
+            hosts.add(os.environ[name].split(":")[0].lower())
+    return hosts
 
 
 def create_app(overrides=None):
@@ -38,12 +50,12 @@ def create_app(overrides=None):
     http_port = int(os.getenv("PORT", "8000"))
     app.config.update(MAX_CONTENT_LENGTH=11 * 1024 * 1024,
                       HTTP_PORT=http_port,
-                      ENABLE_WEBSOCKET=os.getenv("ENABLE_WEBSOCKET", "true").lower() == "true",
+                      ENABLE_WEBSOCKET=os.getenv("ENABLE_WEBSOCKET", "false" if ON_VERCEL else "true").lower() == "true",
                       WEBSOCKET_PORT=int(os.getenv("WEBSOCKET_PORT", str(http_port + 1))),
                       GEMINI_API_KEY=os.getenv("GEMINI_API_KEY", ""),
                       GEMINI_ANALYSIS_MODEL=os.getenv("GEMINI_ANALYSIS_MODEL", "gemini-2.5-flash"),
                       GEMINI_API_TIMEOUT=int(os.getenv("GEMINI_API_TIMEOUT", "60")),
-                      ENABLE_OLLAMA_FALLBACK=os.getenv("ENABLE_OLLAMA_FALLBACK", "true").lower() == "true",
+                      ENABLE_OLLAMA_FALLBACK=os.getenv("ENABLE_OLLAMA_FALLBACK", "false" if ON_VERCEL else "true").lower() == "true",
                       OLLAMA_BASE_URL=os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434"),
                       OLLAMA_ANALYSIS_MODEL=os.getenv("OLLAMA_ANALYSIS_MODEL", "qwen2.5vl:3b"),
                       OLLAMA_API_TIMEOUT=int(os.getenv("OLLAMA_API_TIMEOUT", "120")),
@@ -53,14 +65,15 @@ def create_app(overrides=None):
                       ENABLE_SD_INPAINTING=os.getenv("ENABLE_SD_INPAINTING", "false").lower() == "true",
                       SD_MODEL_PATH=os.getenv("SD_MODEL_PATH", ""),
                       SCALP_MODEL_DIR=os.getenv("SCALP_MODEL_DIR", "models/scalp-classifier"),
-                      TRAINING_DIR=str(ROOT / "data" / "training"),
-                      VISION_TRAINING_DIR=str(ROOT / "data" / "vision-training"),
-                      DATABASE_PATH=os.getenv("DATABASE_PATH", str(ROOT / "data" / "hairline.sqlite3")),
+                      TRAINING_DIR=str(DATA_DIR / "training"),
+                      VISION_TRAINING_DIR=str(DATA_DIR / "vision-training"),
+                      DATABASE_PATH=os.getenv("DATABASE_PATH", str(DATA_DIR / "hairline.sqlite3")),
+                      ALLOWED_HOSTS=allowed_hosts(),
                       SECRET_KEY=os.getenv("APP_SECRET_KEY") or None)
     if overrides:
         app.config.update(overrides)
     if not app.config["SECRET_KEY"]:
-        app.config["SECRET_KEY"] = secret_key(ROOT / "data" / ".session_secret")
+        app.config["SECRET_KEY"] = secret_key(DATA_DIR / ".session_secret")
     database_path = app.config["DATABASE_PATH"]
     if database_path != ":memory:" and not Path(database_path).is_absolute():
         database_path = str(ROOT / database_path)
@@ -91,7 +104,7 @@ def create_app(overrides=None):
 
     @app.before_request
     def local_requests_only():
-        if request.host.split(":")[0] not in {"127.0.0.1", "localhost"}:
+        if request.host.split(":")[0].lower() not in app.config["ALLOWED_HOSTS"]:
             raise ServiceError("로컬 주소로 접속해 주세요.", 403, "invalid_host")
         if request.method in {"POST", "PUT", "PATCH", "DELETE"}:
             origin = request.headers.get("Origin")
@@ -398,6 +411,9 @@ def create_app(overrides=None):
 
     return app
 
+
+if ON_VERCEL:
+    app = create_app()
 
 if __name__ == "__main__":
     from waitress import serve

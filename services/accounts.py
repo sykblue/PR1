@@ -1,3 +1,4 @@
+import os
 import secrets
 import io
 import threading
@@ -67,7 +68,7 @@ def safe_return_to(value):
 
 def init_accounts(app, database):
     app.config.update(SESSION_COOKIE_NAME="hairline_session", SESSION_COOKIE_HTTPONLY=True,
-                      SESSION_COOKIE_SAMESITE="Lax", SESSION_COOKIE_SECURE=False,
+                      SESSION_COOKIE_SAMESITE="Lax", SESSION_COOKIE_SECURE=bool(os.getenv("VERCEL")) or os.getenv("SESSION_COOKIE_SECURE", "false").lower() == "true",
                       PERMANENT_SESSION_LIFETIME=timedelta(hours=8))
     failures = {}
     failure_lock = threading.Lock()
