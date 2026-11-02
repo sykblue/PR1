@@ -1,7 +1,8 @@
 # Upload only what the web app needs. Never upload secrets, local DBs, datasets or large local models.
 /*
 !app.py
-!requirements.txt
+!pyproject.toml
+!uv.lock
 !vercel.json
 !*.html
 !services/
