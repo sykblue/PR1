@@ -161,6 +161,18 @@ class Database:
                 "SELECT id,created_at,model,summary FROM analysis_history WHERE user_id=? ORDER BY id DESC LIMIT 50", (user_id,)).fetchall()
         return [dict(row) for row in rows]
 
+    def dashboard(self, user_id):
+        """Account totals and a small report preview, without loading photo bytes."""
+        with self._lock:
+            counts = self.connection.execute(
+                "SELECT (SELECT COUNT(*) FROM analysis_history WHERE user_id=?) AS report_count,"
+                "(SELECT COUNT(*) FROM photos WHERE user_id=?) AS photo_count",
+                (user_id, user_id)).fetchone()
+            recent = self.connection.execute(
+                "SELECT id,created_at,summary FROM analysis_history WHERE user_id=? ORDER BY id DESC LIMIT 4",
+                (user_id,)).fetchall()
+        return {**dict(counts), "recent_reports": [dict(row) for row in recent]}
+
     def report(self, user_id, identifier):
         with self._lock:
             row = self.connection.execute(

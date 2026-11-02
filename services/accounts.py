@@ -178,6 +178,13 @@ def init_accounts(app, database):
     def history():
         return jsonify(items=database.history(require_user()["id"]))
 
+    @app.get("/api/dashboard")
+    def dashboard():
+        user_id = require_user()["id"]
+        training = app.extensions["trainers"].for_user(user_id).status()
+        return jsonify(**database.dashboard(user_id), training={
+            key: training[key] for key in ("total", "model_ready", "model_stale", "can_train")})
+
     @app.get("/api/photos")
     def photos():
         return jsonify(items=database.photos(require_user()["id"]))

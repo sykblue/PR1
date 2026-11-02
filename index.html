@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="사진에서 헤어라인과 두피 노출을 살펴보고 가상의 모발 변화를 비교하는 로컬 도구">
+  <meta name="description" content="사진 분석, 최근 관찰 기록과 로컬 학습 현황을 한눈에 확인하는 Hairline Lab 대시보드">
   <meta name="theme-color" content="#ffffff">
-  <title>Hairline Lab · 헤어라인을 보는 새로운 방법</title>
+  <title>Hairline Lab · 나의 대시보드</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/static/styles.css">
   <link rel="stylesheet" href="/static/page-experience.css">
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/static/hero.css">
   <link rel="stylesheet" href="/static/account-camera.css">
   <link rel="stylesheet" href="/static/chatbot.css">
+  <link rel="stylesheet" href="/static/dashboard.css">
   <script src="/static/auth.js" defer></script>
   <script src="/static/realtime.js" defer></script>
   <script src="/static/home.js" defer></script>
@@ -26,8 +27,29 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="wordmark" href="/" aria-label="Hairline Lab 처음으로">hairline<span class="wordmark-light">lab</span></a>
-      <nav aria-label="주요 메뉴"><a href="/analysis" class="nav-link">사진 분석</a><a href="/simulation" class="nav-link">변화 미리보기</a><a href="/training" class="nav-link">로컬 학습</a><a href="/guide" class="nav-link">이용 안내</a></nav>
-      <div class="account-actions"><a id="account-name" class="account-profile" href="/profile" aria-label="내 정보" hidden></a><a id="account-login" href="/login" class="text-button">로그인</a><a id="account-register" href="/register" class="text-button account-register">회원가입</a><button id="account-history" type="button" class="text-button" hidden>내 기록</button><button id="account-logout" type="button" class="text-button" hidden>로그아웃</button></div>
+      <nav aria-label="주요 메뉴"><a href="/analysis" class="nav-link">사진 분석</a><a href="/simulation" class="nav-link">변화 미리보기</a><a href="/training" class="nav-link">로컬 학습</a></nav>
+      <details class="dashboard-account-menu"><summary aria-label="계정 메뉴"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg></summary><div class="account-actions"><a id="account-name" class="account-profile" href="/profile" aria-label="내 정보" hidden></a><a id="account-login" href="/login" class="text-button">로그인</a><a id="account-register" href="/register" class="text-button account-register">회원가입</a><button id="account-history" type="button" class="text-button" hidden>내 기록</button><button id="account-logout" type="button" class="text-button" hidden>로그아웃</button></div></details>
+
+    </div>
+  </header>
+  <div class="app-layout" id="app-layout" data-chatbot-default="closed">
+  <main class="container" id="main-content" tabindex="0" aria-labelledby="home-title" data-page-content data-page-kind="home">
+    <div class="page-skeleton dashboard-skeleton" data-page-skeleton aria-hidden="true"><div class="dashboard-sk-left"><i class="sk-shape sk-title"></i><i class="sk-shape sk-line"></i><i class="sk-shape sk-line"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-media"></i><i class="sk-shape sk-action"></i></div><div class="dashboard-sk-center"><div class="dashboard-sk-stats"><i class="sk-shape"></i><i class="sk-shape"></i><i class="sk-shape"></i></div><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="dashboard-sk-right"><i class="sk-shape"></i><i class="sk-shape"></i><i class="sk-shape"></i></div></div>
+    <section class="dashboard-preparation home-preparation dashboard-pane" aria-labelledby="home-tools-title">
+      <div class="dashboard-pane-heading"><h2 id="home-tools-title">사진 준비 도우미</h2><span id="photo-prep-count" role="status" aria-live="polite" aria-atomic="true">0 / 3개 확인</span></div>
+      <fieldset id="photo-prep-fields"><legend class="visually-hidden">사진 분석 전 준비 사항</legend>
+        <label><input type="checkbox" data-photo-prep><span><strong>밝고 고른 조명</strong><small>역광과 강한 그림자를 피해요.</small></span></label>
+        <label><input type="checkbox" data-photo-prep><span><strong>관찰 부위가 보이는 각도</strong><small>헤어라인·정수리가 보이게 준비해요.</small></span></label>
+        <label><input type="checkbox" data-photo-prep><span><strong>필터 없는 선명한 원본</strong><small>보정하지 않은 사진을 준비해요.</small></span></label>
+      </fieldset>
+      <nav class="dashboard-prep-links" aria-label="촬영 도움말"><a href="/guide#photo-guide"><span aria-hidden="true"></span>사진 촬영 가이드</a><a href="/guide#faq-observation"><span aria-hidden="true"></span>관찰 결과 이해하기</a></nav>
+      <progress id="photo-prep-progress" value="0" max="3" aria-label="촬영 준비 확인 항목 수">0 / 3</progress>
+      <figure class="dashboard-photo-example"><svg viewBox="0 0 360 200" aria-hidden="true"><use href="/static/hero-observation.svg#hairline"/></svg><figcaption>촬영 참고 일러스트</figcaption></figure>
+      <a class="button primary dashboard-analysis-button" href="/analysis">사진 분석 시작<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a>
+      <a class="button secondary dashboard-preview-button" href="/simulation">변화 미리보기<svg aria-hidden="true"><use href="/static/icons.svg#compare"/></svg></a>
+      <nav class="dashboard-feature-legend" aria-label="기능 안내"><a href="/analysis"><i class="legend-observe" aria-hidden="true"></i>사진 관찰</a><a href="/simulation"><i class="legend-preview" aria-hidden="true"></i>가상 비교</a><a href="/training"><i class="legend-train" aria-hidden="true"></i>로컬 학습</a></nav>
+      <p class="home-preparation-note dashboard-prep-note" id="photo-prep-message">확인한 항목을 체크해 보세요. 사진은 분석 페이지에서 선택해요.</p>
+      <button class="text-button dashboard-prep-reset" id="photo-prep-reset" type="button" disabled>준비 체크 초기화</button>
     <div class="workspace-helper-tools">
 <div class="chatbot-minimized" id="chatbot-minimized" role="region" aria-label="최소화된 헤어라인 도우미" hidden>
     <button class="chatbot-resume" id="chatbot-resume" type="button" aria-controls="chatbot-panel" aria-expanded="false" aria-label="헤어라인 도우미 이어서 열기">
@@ -39,68 +61,30 @@
   </div>
 <button class="chatbot-launcher" id="chatbot-launcher" type="button" aria-controls="chatbot-panel" aria-expanded="false"><svg aria-hidden="true"><use href="/static/icons.svg#chat"/></svg><span>헤어라인 도우미</span></button>
       </div>
-    </div>
-  </header>
-  <div class="app-layout" id="app-layout" data-chatbot-default="closed">
-  <main class="container" id="main-content" tabindex="0" aria-labelledby="home-title" data-page-content data-page-kind="home">
-    <div class="page-skeleton" data-page-skeleton aria-hidden="true"><div class="home-sk-tools"><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-line"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-line"></i><i class="sk-shape sk-action"></i></div></div><div class="page-sk-grid"><div class="page-sk-card"><i class="sk-shape sk-media"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><i class="sk-shape sk-action"></i></div></div><div class="home-sk-ad sk-shape"></div></div>
-    <p id="account-message" class="account-notice" role="status" aria-live="polite" hidden></p>
-    <h1 class="visually-hidden" id="home-title">Hairline Lab</h1>
-    <section class="home-tools" aria-labelledby="home-tools-title">
-      <div class="home-section-heading"><div><h2 id="home-tools-title">사진 준비 도우미</h2><p>분석을 시작하기 전, 촬영 준비를 가볍게 확인해 보세요.</p></div></div>
-      <div class="home-tools-grid">
-        <div class="home-preparation">
-          <div class="home-preparation-heading"><h3>촬영 준비 체크</h3><span id="photo-prep-count" role="status" aria-live="polite" aria-atomic="true">0 / 3개 확인</span></div>
-          <progress id="photo-prep-progress" value="0" max="3" aria-label="촬영 준비 확인 항목 수">0 / 3</progress>
-          <fieldset id="photo-prep-fields"><legend class="visually-hidden">사진 분석 전 준비 사항</legend>
-            <label><input type="checkbox" data-photo-prep><span><strong>밝고 고른 조명</strong><small>강한 역광이나 그림자를 피해 주세요.</small></span></label>
-            <label><input type="checkbox" data-photo-prep><span><strong>관찰 부위가 보이는 각도</strong><small>헤어라인이나 정수리가 가려지지 않게 준비해 주세요.</small></span></label>
-            <label><input type="checkbox" data-photo-prep><span><strong>필터 없는 선명한 원본</strong><small>보정·확대 대신 원본 사진을 준비해 주세요.</small></span></label>
-          </fieldset>
-          <p class="home-preparation-note" id="photo-prep-message">확인한 항목을 체크해 보세요. 사진은 분석 페이지에서 선택해요.</p>
-          <div class="home-preparation-actions"><button class="text-button" id="photo-prep-reset" type="button" disabled>다시 확인</button><a class="button primary" href="/analysis">사진 분석 열기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></div>
-        </div>
-        <nav class="home-shortcuts" aria-label="추가 기능 바로가기">
-          <a href="/training-guide"><span class="home-tool-icon" aria-hidden="true"><svg><use href="/static/icons.svg#layers"/></svg></span><div><h3>로컬 학습 가이드</h3><p>필요한 사진 수와 학습 순서를 확인해요.</p></div><svg class="home-link-arrow" aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a>
-          <a href="/profile"><span class="home-tool-icon" aria-hidden="true"><svg><use href="/static/icons.svg#report"/></svg></span><div><h3>내 정보와 기록</h3><p>로그인 후 내 계정과 저장한 기록을 살펴봐요.</p></div><svg class="home-link-arrow" aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a>
-        </nav>
-      </div>
     </section>
-    <section class="home-feature-section" aria-label="기능 선택" aria-roledescription="캐러셀">
-      <p class="visually-hidden" id="feature-instructions">카드 영역에서 좌우 방향키로 이동할 수 있어요. 이전·다음 버튼이나 카드 선택 버튼도 사용할 수 있어요.</p>
-      <div class="home-feature-track" id="feature-track" tabindex="0" role="group" aria-label="분석·비교·학습 기능 카드" aria-describedby="feature-instructions">
-        <article class="home-feature-card" data-feature-slide data-feature-title="사진 분석" role="group" aria-roledescription="슬라이드" aria-label="1 / 3"><a href="/analysis" aria-labelledby="feature-analysis-title">
-          <div class="home-feature-cover home-cover-observe"><svg viewBox="0 0 360 200" role="img" aria-label="헤어라인 관찰 일러스트"><use href="/static/hero-observation.svg#hairline"/></svg><span class="home-cover-caption">일러스트</span></div>
-          <div class="home-feature-copy"><h2 id="feature-analysis-title">사진 분석</h2><p>사진 속 모발·두피의 특징을 살펴보세요.</p><span class="home-feature-action button primary">사진 분석 시작<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></div>
-        </a></article>
-        <article class="home-feature-card" data-feature-slide data-feature-title="변화 미리보기" role="group" aria-roledescription="슬라이드" aria-label="2 / 3"><a href="/simulation" aria-labelledby="feature-preview-title">
-          <div class="home-feature-cover home-cover-compare"><div class="home-compare-pair" aria-hidden="true"><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#hairline"/></svg><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#crown"/></svg><span><svg><use href="/static/icons.svg#compare"/></svg></span></div><span class="home-cover-caption">일러스트</span></div>
-          <div class="home-feature-copy"><h2 id="feature-preview-title">변화 미리보기</h2><p>원본과 가상 이미지를 비교해 보세요.</p><span class="home-feature-action button primary">변화 비교 시작<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></div>
-        </a></article>
-        <article class="home-feature-card" data-feature-slide data-feature-title="로컬 학습" role="group" aria-roledescription="슬라이드" aria-label="3 / 3"><a href="/training" aria-labelledby="feature-training-title">
-          <div class="home-feature-cover home-cover-learn"><div class="home-training-stack" aria-hidden="true"><div><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#hairline"/></svg></div><div><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#crown"/></svg></div><div><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#density"/></svg></div></div><span class="home-cover-caption">일러스트</span></div>
-          <div class="home-feature-copy"><h2 id="feature-training-title">로컬 학습</h2><p>사진으로 내 로컬 분류기를 만들어 보세요.</p><span class="home-feature-action button primary">학습 공간 열기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></div>
-        </a></article>
-      </div>
-      <div class="home-carousel-controls" id="feature-controls" hidden>
-        <button class="button secondary home-carousel-arrow is-previous" id="feature-previous" type="button" aria-label="이전 기능 카드" aria-controls="feature-track" disabled><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></button>
-        <div class="home-carousel-picker" role="group" aria-label="기능 카드 선택"><button type="button" data-carousel-to="0" aria-label="사진 분석 카드 보기" aria-current="true" aria-controls="feature-track">사진 분석</button><button type="button" data-carousel-to="1" aria-label="변화 미리보기 카드 보기" aria-controls="feature-track">변화 미리보기</button><button type="button" data-carousel-to="2" aria-label="로컬 학습 카드 보기" aria-controls="feature-track">로컬 학습</button></div>
-        <button class="button secondary home-carousel-arrow" id="feature-next" type="button" aria-label="다음 기능 카드" aria-controls="feature-track"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></button>
-        <span class="home-carousel-position" id="feature-position" role="status" aria-live="polite" aria-atomic="true">1 / 3</span>
-      </div>
+    <section class="dashboard-records dashboard-pane" aria-labelledby="home-title">
+      <header class="visually-hidden"><h1 id="home-title">나의 분석 대시보드</h1><p id="dashboard-greeting">사진 관찰부터 기록과 학습까지, 한곳에서 시작하세요.</p></header>
+      <section class="dashboard-stats" aria-label="내 활동 요약" id="dashboard-stats">
+        <a class="dashboard-stat" href="/#history" id="dashboard-stat-history"><span>저장한 리포트</span><strong id="dashboard-report-count">—</strong><small>내 분석 기록</small></a>
+        <a class="dashboard-stat" href="/profile"><span>보관한 사진</span><strong id="dashboard-photo-count">—</strong><small>계정에 저장한 사진</small></a>
+        <a class="dashboard-stat" href="/training"><span>학습 사진</span><strong id="dashboard-training-count">—</strong><small>로컬 분류기 데이터</small></a>
+      </section>
+      <div class="dashboard-filterbar"><label class="dashboard-search"><svg aria-hidden="true"><use href="/static/icons.svg#scan"/></svg><span class="visually-hidden">최근 분석 기록에서 검색</span><input id="dashboard-search" type="search" placeholder="최근 기록 검색" autocomplete="off" maxlength="100"></label><label><span class="visually-hidden">기록 정렬</span><select id="dashboard-order"><option value="newest">최근순</option><option value="oldest">오래된순</option></select></label><a class="dashboard-filter-history" href="/#history" id="dashboard-history-shortcut">전체 기록</a><button class="dashboard-refresh" id="dashboard-refresh" type="button" aria-label="내 현황 새로고침" title="새로고침" hidden><svg aria-hidden="true"><use href="/static/icons.svg#refresh"/></svg></button></div>
+      <p id="account-message" class="account-notice" role="status" aria-live="polite" hidden></p>
+      <section class="dashboard-recent" aria-labelledby="dashboard-recent-title" id="dashboard-recent">
+        <h2 class="visually-hidden" id="dashboard-recent-title">최근 분석 기록</h2>
+        <div class="dashboard-table-head" aria-hidden="true"><span>기록</span><span>관찰 내용</span><span>보관 상태</span><span>리포트</span></div>
+        <div class="dashboard-empty" id="dashboard-empty"><span class="dashboard-empty-icon" aria-hidden="true"><svg><use href="/static/icons.svg#report"/></svg></span><strong id="dashboard-empty-title">나의 관찰 기록을 모아보세요</strong><p id="dashboard-empty-copy">로그인하면 저장한 리포트를 여기서 볼 수 있어요.</p><a class="text-button" href="/analysis">사진 분석 열기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></div>
+        <ol class="dashboard-report-list" id="dashboard-report-list" hidden></ol>
+      </section>
+      <div class="dashboard-notice" id="dashboard-notice" role="status" aria-live="polite"><span id="dashboard-message">로그인하면 내 기록과 학습 현황을 볼 수 있어요.</span><a href="/login?next=/" id="dashboard-login">로그인<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></div>
+      <footer class="dashboard-pagination"><a class="dashboard-all-records" href="/#history" id="dashboard-history">내 기록 전체 보기</a><span id="dashboard-result-count">최근 저장 기록</span><time id="dashboard-date"></time><span id="dashboard-page-status" role="status" aria-live="polite" aria-atomic="true">1 / 1</span><button id="dashboard-page-previous" type="button" aria-label="이전 기록 페이지" aria-controls="dashboard-report-list" disabled><svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></button><button id="dashboard-page-next" type="button" aria-label="다음 기록 페이지" aria-controls="dashboard-report-list" disabled><svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></button></footer>
     </section>
-    <aside class="home-ad" aria-labelledby="home-ad-title">
-      <div class="home-ad-copy"><div class="home-ad-meta"><span>가상 광고</span><small>HAIRLINE LAB</small></div><h2 id="home-ad-title">오늘의 모습을, 차곡차곡.</h2><p>비슷한 조명과 각도로 나만의 사진 기록을 시작해 보세요.</p><a class="home-ad-link" href="/guide#photo-guide">사진 기록 가이드<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a><small class="home-ad-disclaimer">광고 배너 디자인 예시이며, 실제 제휴 광고가 아니에요.</small></div>
-      <div class="home-ad-art" aria-hidden="true"><div class="home-ad-photo"><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#hairline"/></svg><span>PHOTO LOG</span></div><span class="home-ad-stamp"><svg><use href="/static/icons.svg#clock"/></svg></span></div>
+    <aside class="dashboard-right-rail" aria-label="바로가기와 안내">
+      <section class="dashboard-shortcuts dashboard-pane" aria-labelledby="dashboard-shortcuts-title"><h2 id="dashboard-shortcuts-title">빠른 메뉴</h2><nav aria-label="빠른 메뉴"><a class="is-primary" href="/analysis"><svg aria-hidden="true"><use href="/static/icons.svg#scan"/></svg>사진 분석<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a><a href="/simulation"><svg aria-hidden="true"><use href="/static/icons.svg#compare"/></svg>변화 미리보기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a><a href="/training"><svg aria-hidden="true"><use href="/static/icons.svg#layers"/></svg>로컬 학습<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a><a href="/training-guide"><svg aria-hidden="true"><use href="/static/icons.svg#report"/></svg>학습 가이드<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a><a href="/guide"><svg aria-hidden="true"><use href="/static/icons.svg#shield"/></svg>이용 안내<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a></nav></section>
+      <section class="dashboard-announcement dashboard-pane" aria-labelledby="dashboard-announcement-title"><h2 id="dashboard-announcement-title">공지사항</h2><div class="dashboard-ad-label">가상 광고</div><h3>오늘의 모습을, 차곡차곡.</h3><p>같은 조명과 각도로 관찰 기록을 남겨보세요.</p><a href="/guide#photo-guide">사진 기록 가이드<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a><small>실제 제휴 광고가 아닌 디자인 예시예요.</small></section>
+      <section class="dashboard-training dashboard-pane" aria-labelledby="dashboard-training-title"><div class="dashboard-training-heading"><h2 id="dashboard-training-title">리포트</h2><span class="dashboard-status" id="dashboard-training-badge">내 분류기</span></div><strong id="dashboard-model-state">—</strong><small id="dashboard-model-caption">로그인 후 확인</small><h3 id="dashboard-training-title-text" class="visually-hidden">내 사진으로 시작하는 학습</h3><p id="dashboard-training-description">로그인 후 내 로컬 분류기를 관리해 보세요.</p><a class="dashboard-training-link" href="/training">로컬 학습 현황<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></section>
     </aside>
-    <section class="home-information" aria-labelledby="home-information-title">
-      <div class="home-section-heading"><div><h2 id="home-information-title">알아두면 좋은 이야기</h2><p>사진 준비부터 결과 이해까지, 필요한 정보를 살펴보세요.</p></div><a href="/guide" class="text-button">전체 안내<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></div>
-      <div class="home-information-grid">
-        <a class="home-info-card" href="/guide#photo-guide"><span class="home-info-icon" aria-hidden="true"><svg><use href="/static/icons.svg#frame"/></svg></span><small>촬영 가이드</small><h3>어떤 사진을 준비할까요?</h3><p>조명·각도·원본 사진을 준비하는 방법을 알아보세요.</p><span class="home-info-action">가이드 읽기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></a>
-        <a class="home-info-card" href="/guide#faq-observation"><span class="home-info-icon" aria-hidden="true"><svg><use href="/static/icons.svg#scan"/></svg></span><small>결과 이해</small><h3>관찰 결과는 이렇게 읽어요</h3><p>사진에서 보이는 특징과 사진의 한계를 구분해 살펴보세요.</p><span class="home-info-action">도움말 읽기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></a>
-        <a class="home-info-card" href="/guide#data-guide"><span class="home-info-icon" aria-hidden="true"><svg><use href="/static/icons.svg#shield"/></svg></span><small>데이터 안내</small><h3>내 사진과 기록은 어떻게 쓰일까요?</h3><p>사진 전송 동의와 계정별 저장 정책을 확인해 보세요.</p><span class="home-info-action">안내 읽기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></a>
-      </div>
-    </section>
   </main>
   <aside class="chatbot-panel" id="chatbot-panel" aria-labelledby="chatbot-title" hidden>
     <header class="chatbot-header">
