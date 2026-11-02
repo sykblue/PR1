@@ -412,8 +412,8 @@ def create_app(overrides=None):
     return app
 
 
-if ON_VERCEL:
-    app = create_app()
+# Vercel finds the WSGI app by this top-level name; local runs and tests build their own.
+app = create_app() if ON_VERCEL else None
 
 if __name__ == "__main__":
     from waitress import serve
