@@ -1,0 +1,8 @@
+# Install CUDA PyTorch first using scripts/setup_vlm.ps1. Separate from the web app venv.
+torch==2.8.0
+transformers==4.51.3
+peft==0.15.2
+accelerate==1.12.0
+bitsandbytes==0.49.2
+Pillow>=11.3,<13
+requests>=2.32,<3

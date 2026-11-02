@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="사진에서 헤어라인과 두피 노출을 살펴보고 가상의 모발 변화를 비교하는 로컬 도구">
+  <meta name="theme-color" content="#ffffff">
+  <title>Hairline Lab · 헤어라인을 보는 새로운 방법</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/page-experience.css">
+  <script src="/static/page-experience.js"></script>
+  <link rel="stylesheet" href="/static/hero.css">
+  <link rel="stylesheet" href="/static/account-camera.css">
+  <link rel="stylesheet" href="/static/chatbot.css">
+  <script src="/static/auth.js" defer></script>
+  <script src="/static/realtime.js" defer></script>
+  <script src="/static/home.js" defer></script>
+  <script src="/static/home-preparation.js" defer></script>
+  <script src="/static/chatbot.js" defer></script>
+  <script src="/static/navigation.js" defer></script>
+</head>
+<body class="home-page viewport-page">
+  <div class="visually-hidden" data-page-announcement role="status" aria-live="polite"></div>
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="/" aria-label="Hairline Lab 처음으로">hairline<span class="wordmark-light">lab</span></a>
+      <nav aria-label="주요 메뉴"><a href="/analysis" class="nav-link">사진 분석</a><a href="/simulation" class="nav-link">변화 미리보기</a><a href="/training" class="nav-link">로컬 학습</a><a href="/guide" class="nav-link">이용 안내</a></nav>
+      <div class="account-actions"><a id="account-name" class="account-profile" href="/profile" aria-label="내 정보" hidden></a><a id="account-login" href="/login" class="text-button">로그인</a><a id="account-register" href="/register" class="text-button account-register">회원가입</a><button id="account-history" type="button" class="text-button" hidden>내 기록</button><button id="account-logout" type="button" class="text-button" hidden>로그아웃</button></div>
+    <div class="workspace-helper-tools">
+<div class="chatbot-minimized" id="chatbot-minimized" role="region" aria-label="최소화된 헤어라인 도우미" hidden>
+    <button class="chatbot-resume" id="chatbot-resume" type="button" aria-controls="chatbot-panel" aria-expanded="false" aria-label="헤어라인 도우미 이어서 열기">
+      <span class="chatbot-mini-avatar" aria-hidden="true"><svg><use href="/static/icons.svg#chat"/></svg></span>
+      <span class="chatbot-mini-copy"><strong>헤어라인 도우미</strong><span id="chatbot-minimized-status">궁금한 내용을 선택해 보세요</span></span>
+      <svg class="chatbot-restore-icon" aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg>
+    </button>
+    <button class="chatbot-mini-dismiss" id="chatbot-mini-dismiss" type="button" aria-label="최소화된 헤어라인 도우미 닫기" title="닫기"><svg aria-hidden="true"><use href="/static/icons.svg#close"/></svg></button>
+  </div>
+<button class="chatbot-launcher" id="chatbot-launcher" type="button" aria-controls="chatbot-panel" aria-expanded="false"><svg aria-hidden="true"><use href="/static/icons.svg#chat"/></svg><span>헤어라인 도우미</span></button>
+      </div>
+    </div>
+  </header>
+  <div class="app-layout" id="app-layout" data-chatbot-default="closed">
+  <main class="container" id="main-content" tabindex="0" aria-labelledby="home-title" data-page-content data-page-kind="home">
+    <div class="page-skeleton" data-page-skeleton aria-hidden="true"><div class="home-sk-tools"><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-line"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-line"></i><i class="sk-shape sk-action"></i></div></div><div class="page-sk-grid"><div class="page-sk-card"><i class="sk-shape sk-media"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><i class="sk-shape sk-action"></i></div></div><div class="home-sk-ad sk-shape"></div></div>
+    <p id="account-message" class="account-notice" role="status" aria-live="polite" hidden></p>
+    <h1 class="visually-hidden" id="home-title">Hairline Lab</h1>
+    <section class="home-tools" aria-labelledby="home-tools-title">
+      <div class="home-section-heading"><div><h2 id="home-tools-title">사진 준비 도우미</h2><p>분석을 시작하기 전, 촬영 준비를 가볍게 확인해 보세요.</p></div></div>
+      <div class="home-tools-grid">
+        <div class="home-preparation">
+          <div class="home-preparation-heading"><h3>촬영 준비 체크</h3><span id="photo-prep-count" role="status" aria-live="polite" aria-atomic="true">0 / 3개 확인</span></div>
+          <progress id="photo-prep-progress" value="0" max="3" aria-label="촬영 준비 확인 항목 수">0 / 3</progress>
+          <fieldset id="photo-prep-fields"><legend class="visually-hidden">사진 분석 전 준비 사항</legend>
+            <label><input type="checkbox" data-photo-prep><span><strong>밝고 고른 조명</strong><small>강한 역광이나 그림자를 피해 주세요.</small></span></label>
+            <label><input type="checkbox" data-photo-prep><span><strong>관찰 부위가 보이는 각도</strong><small>헤어라인이나 정수리가 가려지지 않게 준비해 주세요.</small></span></label>
+            <label><input type="checkbox" data-photo-prep><span><strong>필터 없는 선명한 원본</strong><small>보정·확대 대신 원본 사진을 준비해 주세요.</small></span></label>
+          </fieldset>
+          <p class="home-preparation-note" id="photo-prep-message">확인한 항목을 체크해 보세요. 사진은 분석 페이지에서 선택해요.</p>
+          <div class="home-preparation-actions"><button class="text-button" id="photo-prep-reset" type="button" disabled>다시 확인</button><a class="button primary" href="/analysis">사진 분석 열기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></div>
+        </div>
+        <nav class="home-shortcuts" aria-label="추가 기능 바로가기">
+          <a href="/training-guide"><span class="home-tool-icon" aria-hidden="true"><svg><use href="/static/icons.svg#layers"/></svg></span><div><h3>로컬 학습 가이드</h3><p>필요한 사진 수와 학습 순서를 확인해요.</p></div><svg class="home-link-arrow" aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a>
+          <a href="/profile"><span class="home-tool-icon" aria-hidden="true"><svg><use href="/static/icons.svg#report"/></svg></span><div><h3>내 정보와 기록</h3><p>로그인 후 내 계정과 저장한 기록을 살펴봐요.</p></div><svg class="home-link-arrow" aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a>
+        </nav>
+      </div>
+    </section>
+    <section class="home-feature-section" aria-label="기능 선택" aria-roledescription="캐러셀">
+      <p class="visually-hidden" id="feature-instructions">카드 영역에서 좌우 방향키로 이동할 수 있어요. 이전·다음 버튼이나 카드 선택 버튼도 사용할 수 있어요.</p>
+      <div class="home-feature-track" id="feature-track" tabindex="0" role="group" aria-label="분석·비교·학습 기능 카드" aria-describedby="feature-instructions">
+        <article class="home-feature-card" data-feature-slide data-feature-title="사진 분석" role="group" aria-roledescription="슬라이드" aria-label="1 / 3"><a href="/analysis" aria-labelledby="feature-analysis-title">
+          <div class="home-feature-cover home-cover-observe"><svg viewBox="0 0 360 200" role="img" aria-label="헤어라인 관찰 일러스트"><use href="/static/hero-observation.svg#hairline"/></svg><span class="home-cover-caption">일러스트</span></div>
+          <div class="home-feature-copy"><h2 id="feature-analysis-title">사진 분석</h2><p>사진 속 모발·두피의 특징을 살펴보세요.</p><span class="home-feature-action button primary">사진 분석 시작<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></div>
+        </a></article>
+        <article class="home-feature-card" data-feature-slide data-feature-title="변화 미리보기" role="group" aria-roledescription="슬라이드" aria-label="2 / 3"><a href="/simulation" aria-labelledby="feature-preview-title">
+          <div class="home-feature-cover home-cover-compare"><div class="home-compare-pair" aria-hidden="true"><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#hairline"/></svg><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#crown"/></svg><span><svg><use href="/static/icons.svg#compare"/></svg></span></div><span class="home-cover-caption">일러스트</span></div>
+          <div class="home-feature-copy"><h2 id="feature-preview-title">변화 미리보기</h2><p>원본과 가상 이미지를 비교해 보세요.</p><span class="home-feature-action button primary">변화 비교 시작<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></div>
+        </a></article>
+        <article class="home-feature-card" data-feature-slide data-feature-title="로컬 학습" role="group" aria-roledescription="슬라이드" aria-label="3 / 3"><a href="/training" aria-labelledby="feature-training-title">
+          <div class="home-feature-cover home-cover-learn"><div class="home-training-stack" aria-hidden="true"><div><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#hairline"/></svg></div><div><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#crown"/></svg></div><div><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#density"/></svg></div></div><span class="home-cover-caption">일러스트</span></div>
+          <div class="home-feature-copy"><h2 id="feature-training-title">로컬 학습</h2><p>사진으로 내 로컬 분류기를 만들어 보세요.</p><span class="home-feature-action button primary">학습 공간 열기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></div>
+        </a></article>
+      </div>
+      <div class="home-carousel-controls" id="feature-controls" hidden>
+        <button class="button secondary home-carousel-arrow is-previous" id="feature-previous" type="button" aria-label="이전 기능 카드" aria-controls="feature-track" disabled><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></button>
+        <div class="home-carousel-picker" role="group" aria-label="기능 카드 선택"><button type="button" data-carousel-to="0" aria-label="사진 분석 카드 보기" aria-current="true" aria-controls="feature-track">사진 분석</button><button type="button" data-carousel-to="1" aria-label="변화 미리보기 카드 보기" aria-controls="feature-track">변화 미리보기</button><button type="button" data-carousel-to="2" aria-label="로컬 학습 카드 보기" aria-controls="feature-track">로컬 학습</button></div>
+        <button class="button secondary home-carousel-arrow" id="feature-next" type="button" aria-label="다음 기능 카드" aria-controls="feature-track"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></button>
+        <span class="home-carousel-position" id="feature-position" role="status" aria-live="polite" aria-atomic="true">1 / 3</span>
+      </div>
+    </section>
+    <aside class="home-ad" aria-labelledby="home-ad-title">
+      <div class="home-ad-copy"><div class="home-ad-meta"><span>가상 광고</span><small>HAIRLINE LAB</small></div><h2 id="home-ad-title">오늘의 모습을, 차곡차곡.</h2><p>비슷한 조명과 각도로 나만의 사진 기록을 시작해 보세요.</p><a class="home-ad-link" href="/guide#photo-guide">사진 기록 가이드<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a><small class="home-ad-disclaimer">광고 배너 디자인 예시이며, 실제 제휴 광고가 아니에요.</small></div>
+      <div class="home-ad-art" aria-hidden="true"><div class="home-ad-photo"><svg viewBox="0 0 360 200"><use href="/static/hero-observation.svg#hairline"/></svg><span>PHOTO LOG</span></div><span class="home-ad-stamp"><svg><use href="/static/icons.svg#clock"/></svg></span></div>
+    </aside>
+    <section class="home-information" aria-labelledby="home-information-title">
+      <div class="home-section-heading"><div><h2 id="home-information-title">알아두면 좋은 이야기</h2><p>사진 준비부터 결과 이해까지, 필요한 정보를 살펴보세요.</p></div><a href="/guide" class="text-button">전체 안내<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></div>
+      <div class="home-information-grid">
+        <a class="home-info-card" href="/guide#photo-guide"><span class="home-info-icon" aria-hidden="true"><svg><use href="/static/icons.svg#frame"/></svg></span><small>촬영 가이드</small><h3>어떤 사진을 준비할까요?</h3><p>조명·각도·원본 사진을 준비하는 방법을 알아보세요.</p><span class="home-info-action">가이드 읽기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></a>
+        <a class="home-info-card" href="/guide#faq-observation"><span class="home-info-icon" aria-hidden="true"><svg><use href="/static/icons.svg#scan"/></svg></span><small>결과 이해</small><h3>관찰 결과는 이렇게 읽어요</h3><p>사진에서 보이는 특징과 사진의 한계를 구분해 살펴보세요.</p><span class="home-info-action">도움말 읽기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></a>
+        <a class="home-info-card" href="/guide#data-guide"><span class="home-info-icon" aria-hidden="true"><svg><use href="/static/icons.svg#shield"/></svg></span><small>데이터 안내</small><h3>내 사진과 기록은 어떻게 쓰일까요?</h3><p>사진 전송 동의와 계정별 저장 정책을 확인해 보세요.</p><span class="home-info-action">안내 읽기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></a>
+      </div>
+    </section>
+  </main>
+  <aside class="chatbot-panel" id="chatbot-panel" aria-labelledby="chatbot-title" hidden>
+    <header class="chatbot-header">
+      <span class="chatbot-avatar" aria-hidden="true"><svg><use href="/static/icons.svg#chat"/></svg></span>
+      <div class="chatbot-heading"><span class="chatbot-eyebrow">HAIRLINE LAB · GUIDE</span><h2 id="chatbot-title">헤어라인 도우미</h2><p>관찰부터 자가 점검까지</p></div>
+      <div class="chatbot-header-actions">
+        <button class="chatbot-icon-button" id="chatbot-minimize" type="button" aria-label="헤어라인 도우미 최소화" aria-controls="chatbot-panel" title="최소화"><svg aria-hidden="true"><use href="/static/icons.svg#minimize"/></svg></button>
+        <button class="chatbot-icon-button" id="chatbot-close" type="button" aria-label="헤어라인 도우미 닫기" title="닫기"><svg aria-hidden="true"><use href="/static/icons.svg#close"/></svg></button>
+      </div>
+    </header>
+    <div class="chatbot-toolbar"><span><svg aria-hidden="true"><use href="/static/icons.svg#shield"/></svg>선택형 안내</span><button id="chatbot-reset" type="button"><svg aria-hidden="true"><use href="/static/icons.svg#refresh"/></svg>처음으로</button></div>
+    <div class="chatbot-content">
+      <div class="chatbot-messages" id="chatbot-messages" role="log" aria-label="헤어라인 도우미 대화" aria-live="polite" aria-relevant="additions"></div>
+      <div class="chatbot-controls" id="chatbot-controls" role="group" aria-label="도우미 답변 선택"></div>
+    </div>
+    <footer class="chatbot-footer"><p><svg aria-hidden="true"><use href="/static/icons.svg#shield"/></svg>답변은 저장되거나 외부로 전송되지 않아요.</p><p>자가 점검은 탈모 진단·단계 판정이 아니에요.</p><div><span>안내 근거</span><a href="https://www.aad.org/public/diseases/hair-loss/insider/begin" target="_blank" rel="noreferrer">미국피부과학회<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a><a href="https://www.nhs.uk/symptoms/hair-loss/" target="_blank" rel="noreferrer">NHS<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a></div></footer>
+  </aside>
+  </div>
+  
+  <dialog id="history-dialog" class="app-dialog history-dialog" aria-labelledby="history-title" aria-describedby="history-description">
+    <div class="history-header">
+      <span class="history-header-icon" aria-hidden="true"><svg><use href="/static/icons.svg#report"/></svg></span>
+      <div class="history-heading"><span class="history-eyebrow">MY RECORDS</span><h2 id="history-title">내 분석 기록</h2></div>
+      <button id="history-close" class="history-close" type="button" aria-label="내 분석 기록 닫기"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#close"/></svg></button>
+      <p id="history-description">차곡차곡 쌓인 관찰을 다시 살펴보세요.</p>
+    </div>
+    <div class="history-toolbar"><span>저장한 리포트 <strong id="history-count">—</strong></span><span class="history-sort"><svg aria-hidden="true"><use href="/static/icons.svg#clock"/></svg>최신순 · 최근 50개</span></div>
+    <div class="history-body">
+      <p id="history-message" class="history-message" role="status" aria-live="polite" hidden></p>
+      <div id="history-loading" class="history-loading" role="status" hidden><span class="visually-hidden">기록을 불러오고 있어요.</span><div class="history-skeleton" aria-hidden="true"><span></span><i></i><i></i></div><div class="history-skeleton" aria-hidden="true"><span></span><i></i><i></i></div><div class="history-skeleton" aria-hidden="true"><span></span><i></i><i></i></div></div>
+      <div id="history-empty" class="history-empty" hidden><span class="history-empty-icon" aria-hidden="true"><svg><use href="/static/icons.svg#report"/></svg></span><h3>아직 저장된 기록이 없어요</h3><p>사진 분석 전에 ‘내 계정에 저장’을 선택하면<br>나의 관찰 리포트를 여기에서 모아 볼 수 있어요.</p><button id="history-start" class="button primary" type="button">첫 관찰 기록 만들기<svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></button></div>
+      <div id="history-list" class="history-list" role="list" aria-label="저장한 관찰 리포트"></div>
+    </div>
+    <div class="history-footer"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#shield"/></svg><p>내 계정에만 보이는 기록이에요. 함께 저장한 사진은 리포트에서 확인할 수 있어요.</p></div>
+  </dialog>
+</body>
+</html>

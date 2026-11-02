@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="내 사진에 직접 라벨을 붙여 로컬 분류기를 학습하는 실험 페이지">
+  <meta name="theme-color" content="#ffffff">
+  <title>로컬 학습 · Hairline Lab</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/page-experience.css">
+  <script src="/static/page-experience.js"></script>
+  <link rel="stylesheet" href="/static/account-camera.css">
+  <script src="/static/auth.js" defer></script>
+  <script src="/static/realtime.js" defer></script>
+  <script src="/static/training.js" defer></script>
+  <script src="/static/camera.js" defer></script>
+</head>
+<body class="training-page viewport-page">
+  <div class="visually-hidden" data-page-announcement role="status" aria-live="polite"></div>
+  <a class="skip-link" href="#training">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="/" aria-label="Hairline Lab 처음으로">hairline<span class="wordmark-light">lab</span></a>
+      <nav aria-label="주요 메뉴"><a href="/analysis" class="nav-link">사진 분석</a><a href="/simulation" class="nav-link">변화 미리보기</a><a href="/training" class="nav-link active" aria-current="page">로컬 학습</a><a href="/guide" class="nav-link">이용 안내</a></nav>
+      <div class="account-actions"><a id="account-name" class="account-profile" href="/profile" aria-label="내 정보" hidden></a><a id="account-login" href="/login?next=%2Ftraining" class="text-button">로그인</a><a id="account-register" href="/register?next=%2Ftraining" class="text-button account-register">회원가입</a><button id="account-logout" type="button" class="text-button" hidden>로그아웃</button></div>
+    </div>
+  </header>
+  <main class="container" data-page-content data-page-kind="training">
+    <div class="page-skeleton" data-page-skeleton aria-hidden="true"><div class="page-sk-grid"><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-media"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-action"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><i class="sk-shape sk-action"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div></div></div>
+    <p id="account-message" class="account-notice" role="status" aria-live="polite" hidden></p>
+    <section id="training" class="training-section" aria-labelledby="training-title">
+      <h1 class="visually-hidden" id="training-title">로컬 사진 분류기 학습</h1>
+      <div id="training-message" class="inline-message" role="status" aria-live="polite" hidden></div>
+      <div class="training-workspace">
+<section class="panel training-registration" aria-labelledby="training-registration-title"><div class="training-card-scroll" tabindex="0" role="region" aria-label="학습 사진 등록 설정"><h3 id="training-registration-title">학습 사진 등록</h3><p class="training-intro">정면·정수리 등 촬영 유형을 섞지 말고 비슷한 구도로 준비해 주세요. 같은 사람은 항상 같은 익명 그룹 코드를 사용해요.</p>
+          <label class="field-label" for="training-files">등록할 사진 · 여러 장 선택 가능</label><input id="training-files" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+          <div class="training-camera-entry"><button id="camera-open" class="button secondary" type="button" disabled><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#frame"/></svg>카메라로 촬영</button></div><input id="camera-file" type="file" accept="image/jpeg,image/png,image/webp" capture="user" hidden disabled>
+          <div class="training-camera-preview" id="training-camera-preview" hidden><img id="training-camera-image" alt="촬영한 학습 사진 미리보기"><div><strong id="training-camera-name"></strong><p>등록하기를 누르면 학습 사진에 저장돼요.</p><button id="training-camera-remove" type="button" class="text-button">촬영 사진 제거</button></div></div>
+          <div class="training-fields"><div><label class="field-label" for="training-label">사용자 라벨</label><select id="training-label"><option value="reference">기준 사진</option><option value="concern">탈모 의심 사진</option></select></div><div><label class="field-label" for="training-group">익명 그룹 코드</label><input id="training-group" type="text" maxlength="40" pattern="[A-Za-z0-9_-]+" placeholder="예: p001" autocomplete="off"></div></div>
+          <div class="consent-row"><input id="training-storage-consent" type="checkbox"><label for="training-storage-consent">사용 권한이 있는 사진을 학습용으로 이 컴퓨터에 저장하는 데 동의해요<span>사진·라벨·특징값은 내 계정에 연결해 저장하고, 학습에 필요한 파일도 함께 보관해요.</span></label></div>
+          
+        </div><div class="training-card-actions"><button id="training-add" class="button secondary" type="button"><span>선택한 사진 등록하기</span></button></div></section>
+<section class="panel training-evaluation" aria-labelledby="training-evaluation-title"><div class="training-card-scroll" tabindex="0" role="region" aria-label="학습 데이터와 검증 결과"><h3 id="training-evaluation-title">데이터와 검증 결과</h3><div class="training-counts"><div><span>기준 사진</span><strong id="training-reference-count">0장</strong></div><div><span>탈모 의심 사진</span><strong id="training-concern-count">0장</strong></div></div><p id="training-requirements">라벨별 5장 이상·그룹별 분리를 확인하고 있어요</p><div id="training-metrics" class="training-metrics" hidden></div><p class="training-limits">직접 지정한 라벨을 구분하는 로컬 분류기예요. 검증 수치는 사용자 라벨과의 일치율이며 의료 진단 정확도가 아니에요.</p></div><div class="training-card-actions"><button id="training-run" class="button primary" type="button" disabled><span>로컬 분류기 학습하기</span></button><button id="training-export" type="button" class="text-button" disabled>평가 결과 JSON 저장</button></div></section>
+<section class="panel training-samples" aria-labelledby="training-samples-title"><div class="training-samples-heading"><h3 id="training-samples-title">등록한 사진 목록</h3><span id="training-total">0장</span></div><div class="table-scroll" tabindex="0" role="region" aria-label="등록한 학습 사진 목록"><table><thead><tr><th scope="col">사진 ID</th><th scope="col">라벨</th><th scope="col">익명 그룹</th><th scope="col">등록 위치</th><th scope="col">관리</th></tr></thead><tbody id="training-sample-list"></tbody></table></div></section>
+      </div>
+      
+      
+    </section>
+  </main>
+  <dialog id="camera-dialog" class="app-dialog camera-dialog" aria-labelledby="camera-title"><div class="dialog-heading"><h2 id="camera-title">학습 사진 촬영</h2><button id="camera-close" class="dialog-close" type="button">닫기</button></div><p class="dialog-description">밝은 곳에서 머리 전체가 보이도록 맞춰 주세요. 촬영 전 화면은 서버로 보내지 않아요.</p><div class="camera-view"><video id="camera-video" autoplay playsinline muted aria-label="학습 사진 카메라 미리보기"></video><span class="camera-guide" aria-hidden="true"></span></div><p id="camera-message" role="status" aria-live="polite"></p><div class="camera-actions"><button id="camera-switch" class="button secondary" type="button">전·후면 전환</button><button id="camera-capture" class="button primary" type="button" disabled>촬영하고 불러오기</button></div><p class="camera-footnote">촬영 후 라벨·익명 그룹·저장 동의를 확인하고 등록해 주세요. 전면 미리보기만 좌우 반전되며 저장할 사진은 반전되지 않아요.</p></dialog>
+  <footer><div class="container footer-inner"><a href="/" class="footer-brand">hairline lab</a><span>오늘의 모습을 이해하는 작은 실험</span><span>사진 기반 참고 도구 · 의료 진단 목적 아님</span></div></footer>
+</body>
+</html>

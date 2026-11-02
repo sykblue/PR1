@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>비전 모델 학습 · Hairline Lab</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/page-experience.css">
+  <script src="/static/page-experience.js"></script>
+  <link rel="stylesheet" href="/static/vision-training.css">
+  <script src="/static/auth.js" defer></script>
+  <script src="/static/vision-training.js" defer></script>
+</head>
+<body class="vision-training-page viewport-page">
+  <div class="visually-hidden" data-page-announcement role="status" aria-live="polite"></div>
+  <a class="skip-link" href="#vision-workspace">본문으로 건너뛰기</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="wordmark" href="/" aria-label="Hairline Lab 처음으로">hairline<span class="wordmark-light">lab</span></a>
+    <nav aria-label="주요 메뉴"><a href="/analysis" class="nav-link">사진 분석</a><a href="/simulation" class="nav-link">변화 미리보기</a><a href="/training" class="nav-link active" aria-current="page">로컬 학습</a><a href="/guide" class="nav-link">이용 안내</a></nav>
+    <div class="account-actions"><a id="account-name" class="account-profile" href="/profile" aria-label="내 정보" hidden></a><a id="account-login" href="/login?next=%2Ftraining%2Fvision" class="text-button">로그인</a><a id="account-register" href="/register?next=%2Ftraining%2Fvision" class="text-button account-register">회원가입</a><button id="account-logout" type="button" class="text-button" hidden>로그아웃</button></div>
+  </div></header>
+  <main class="container" data-page-content data-page-kind="vision">
+    <div class="page-skeleton" data-page-skeleton aria-hidden="true"><div class="page-sk-grid"><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-media"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-action"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><i class="sk-shape sk-field"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><i class="sk-shape sk-action"></i></div></div></div>
+    <p id="account-message" class="account-notice" role="status" aria-live="polite" hidden></p>
+    <h1 class="visually-hidden" id="vision-title">비전 모델 학습</h1>
+    <p class="inline-message" id="vision-message" role="status" aria-live="polite" hidden></p>
+    <form class="vision-workspace" id="vision-workspace">
+      <section class="panel vision-card" aria-labelledby="vision-photo-title">
+        <div class="vision-card-heading"><span class="vision-step">01</span><h2 id="vision-photo-title">사진과 그룹</h2><span id="vision-sample-count">0장</span></div>
+        <div class="vision-card-scroll" tabindex="0" role="region" aria-label="비전 학습 사진과 예시 목록">
+          <label class="vision-photo" for="vision-photo"><span id="vision-photo-empty"><svg aria-hidden="true"><use href="/static/icons.svg#portrait"/></svg><strong>학습할 사진 선택</strong><small>JPG · PNG · WEBP, 10MB 이하</small></span><img id="vision-preview" alt="선택한 학습 사진" hidden></label>
+          <input id="vision-photo" type="file" accept="image/jpeg,image/png,image/webp">
+          <label class="field-label" for="vision-group">익명 그룹 코드</label><input id="vision-group" type="text" maxlength="40" pattern="[A-Za-z0-9_-]+" placeholder="예: p001" autocomplete="off" required><p class="vision-hint">같은 사람은 같은 코드로 묶어 학습·검증을 분리해요.</p>
+          <label class="field-label" for="vision-focus">관찰 부위</label><select id="vision-focus"><option value="all">전체</option><option value="hairline">헤어라인</option><option value="crown">정수리·가르마</option><option value="density">모발 분포</option></select>
+          <div class="consent-row"><input id="vision-storage-consent" type="checkbox"><label for="vision-storage-consent">사용 권한이 있는 사진과 정답 설명을 학습용으로 저장하는 데 동의해요<span>내 계정의 로컬 폴더에 사진·정답과 학습별 복사본을 저장해요. 외부로 업로드하지 않아요.</span></label></div>
+          <div class="vision-list-heading"><h3>내 정답 예시</h3><button type="button" class="text-button" id="vision-new">새 예시</button></div>
+          <p class="vision-hint" id="vision-sample-empty">사진과 정답을 등록하면 여기에 표시돼요.</p><div class="vision-samples" id="vision-samples" role="list" aria-label="내 비전 학습 예시"></div>
+        </div>
+        <div class="vision-card-actions"><button class="button primary" type="submit" id="vision-save" disabled>사진과 정답 저장</button></div>
+      </section>
+      <section class="panel vision-card" aria-labelledby="vision-target-title">
+        <div class="vision-card-heading"><span class="vision-step">02</span><h2 id="vision-target-title">정답 설명</h2><span class="tag neutral">직접 확인</span></div>
+        <div class="vision-card-scroll" tabindex="0" role="region" aria-label="학습 정답 설명 입력">
+          <p class="vision-hint">관찰 가능한 특징과 사진의 한계를 적어 주세요. AI 결과를 정답으로 자동 등록하지 않아요.</p>
+          <label class="field-label" for="vision-usable">사진을 관찰할 수 있나요?</label><select id="vision-usable" required><option value="">선택해 주세요</option><option value="true">가능 · 한 사람의 머리와 모발이 보여요</option><option value="false">불가 · 머리가 없거나 흐려요</option></select>
+          <label class="field-label" for="vision-signal">보이는 두피 노출</label><select id="vision-signal" required><option value="">선택해 주세요</option><option value="not_obvious">뚜렷하지 않음</option><option value="visible">노출 관찰</option><option value="unclear">판단 어려움</option></select>
+          <label class="field-label" for="vision-summary">관찰 요약</label><textarea id="vision-summary" rows="3" maxlength="160" placeholder="사진에 보이는 모습을 짧게 설명해 주세요." required></textarea>
+          <label class="field-label" for="vision-observations">부위별 관찰 <small>한 줄에 하나</small></label><textarea id="vision-observations" rows="4" maxlength="2400" placeholder="헤어라인 | 앞쪽 경계가 사진에 보여요.&#10;가르마 | 조명 때문에 일부가 밝게 보여요."></textarea><p class="vision-hint">‘부위 | 설명’ 형식으로 최대 6개. 관찰 불가 사진은 비워 주세요.</p>
+          <label class="field-label" for="vision-limitations">사진의 한계 <small>한 줄에 하나</small></label><textarea id="vision-limitations" rows="3" maxlength="1200" placeholder="한 장의 사진으로 이전과의 변화를 비교할 수 없어요." required></textarea>
+          <label class="field-label" for="vision-next-steps">다음 행동 <small>한 줄에 하나</small></label><textarea id="vision-next-steps" rows="3" maxlength="1200" placeholder="같은 조명과 각도로 다시 기록해 보세요." required></textarea>
+          <p class="vision-hint">의료 진단·탈모 단계·확률·약 처방을 학습 정답으로 사용하지 않아요.</p>
+        </div>
+        <div class="vision-card-actions vision-target-note">관찰 가능·불가 각각 4장 이상, 익명 그룹 4개부터 시작해요.</div>
+      </section>
+      <section class="panel vision-card" aria-labelledby="vision-job-title">
+        <div class="vision-card-heading"><span class="vision-step">03</span><h2 id="vision-job-title">학습과 적용</h2><button type="button" class="text-button" id="vision-refresh">새로고침</button></div>
+        <div class="vision-card-scroll" tabindex="0" role="region" aria-label="학습 준비 상태와 모델 결과">
+          <div class="vision-counts"><div><span>관찰 가능</span><strong id="vision-usable-count">0</strong></div><div><span>관찰 불가</span><strong id="vision-unusable-count">0</strong></div><div><span>익명 그룹</span><strong id="vision-group-count">0</strong></div></div>
+          <p class="vision-readiness" id="vision-readiness">로그인 후 준비 상태를 확인할 수 있어요.</p><p class="vision-hint" id="vision-runtime-detail"></p>
+          <label class="field-label" for="vision-steps">학습 스텝</label><select id="vision-steps"><option value="10">10 스텝 · 동작 확인</option><option value="20" selected>20 스텝 · 기본</option><option value="50">50 스텝</option><option value="100">100 스텝</option><option value="200">200 스텝</option></select>
+          <p class="vision-hint">4비트 QLoRA · 한 번에 사진 1장. 학습은 GPU를 사용하며 완료까지 시간이 걸려요.</p>
+          <div class="vision-progress" id="vision-progress" hidden><div><strong id="vision-progress-title">학습 준비</strong><span id="vision-progress-step">0 / 20</span></div><progress id="vision-progress-bar" max="20" value="0" aria-label="비전 모델 학습 진행"></progress><p id="vision-progress-detail" role="status" aria-live="polite"></p></div>
+          <div class="vision-list-heading"><h3>내 학습 모델</h3><button class="text-button" type="button" id="vision-use-base" disabled>기본 Ollama로</button></div><p class="vision-hint" id="vision-job-empty">완료한 모델을 테스트하고 내 분석에 적용해 보세요.</p><div id="vision-jobs" class="vision-jobs"></div>
+          <p class="vision-hint">검증 손실은 정답 문장 학습의 지표이며 의료 정확도가 아니에요. 적용한 모델은 내 계정의 Gemini 한도 발생 시에만 사용해요.</p>
+        </div>
+        <div class="vision-card-actions"><button class="button primary" type="button" id="vision-start" disabled>QLoRA 학습 시작</button><button class="button secondary" type="button" id="vision-cancel" disabled>학습 취소</button></div>
+      </section>
+    </form>
+  </main>
+  <dialog class="app-dialog vision-test-dialog" id="vision-test-dialog" aria-labelledby="vision-test-title"><div class="dialog-heading"><h2 id="vision-test-title">학습 모델 테스트</h2><button type="button" class="dialog-close" id="vision-test-close">닫기</button></div><p id="vision-test-state" role="status" aria-live="polite"></p><pre id="vision-test-result" tabindex="0" aria-label="학습 모델 테스트 결과"></pre><p class="vision-hint">왼쪽에서 선택한 사진만 로컬 모델로 관찰해요. 이 테스트는 사진·결과를 기록에 저장하지 않아요.</p></dialog>
+</body>
+</html>

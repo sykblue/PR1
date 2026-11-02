@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Hairline Lab 로컬 학습의 횟수, 최소 사진 수, 사람 그룹과 재학습 시점을 안내합니다.">
+  <meta name="theme-color" content="#ffffff">
+  <title>학습 가이드 · Hairline Lab</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/page-experience.css">
+  <script src="/static/page-experience.js"></script>
+  <link rel="stylesheet" href="/static/account-camera.css">
+  <link rel="stylesheet" href="/static/training-guide.css">
+  <script src="/static/auth.js" defer></script>
+  <script src="/static/realtime.js" defer></script>
+  <script src="/static/training-guide.js" defer></script>
+</head>
+<body class="training-guide-page viewport-page">
+  <div class="visually-hidden" data-page-announcement role="status" aria-live="polite"></div>
+  <a class="skip-link" href="#guide-content">학습 가이드 본문으로 건너뛰기</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="wordmark" href="/" aria-label="Hairline Lab 홈으로">hairline<span class="wordmark-light">lab</span></a>
+    <nav aria-label="주요 메뉴"><a href="/analysis" class="nav-link">사진 분석</a><a href="/simulation" class="nav-link">변화 미리보기</a><a href="/training" class="nav-link active" aria-current="location">로컬 학습</a><a href="/guide" class="nav-link">이용 안내</a></nav>
+    <div class="account-actions"><a id="account-name" class="account-profile" href="/profile" aria-label="내 정보" hidden></a><a id="account-login" href="/login?next=%2Ftraining-guide" class="text-button">로그인</a><a id="account-register" href="/register?next=%2Ftraining-guide" class="text-button account-register">회원가입</a><button id="account-logout" class="text-button" type="button" hidden>로그아웃</button></div>
+  </div></header>
+  <main id="guide-content" class="container guide-main" data-page-content data-page-kind="training-guide">
+    <div class="page-skeleton" data-page-skeleton aria-hidden="true"><div class="page-sk-toolbar"><i class="sk-shape sk-title"></i><i class="sk-shape sk-caption"></i></div><div class="page-sk-grid"><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-media"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-action"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><i class="sk-shape sk-action"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div></div></div>
+    <p id="account-message" class="account-notice" role="status" aria-live="polite" hidden></p>
+    <div class="training-guide-workspace">
+<section class="guide-hero" aria-labelledby="guide-title" tabindex="0">
+      <div class="guide-hero-copy"><a class="guide-back" href="/training"><svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg>로컬 학습으로 돌아가기</a><span class="guide-eyebrow">LOCAL TRAINING GUIDE</span><h1 id="guide-title">학습은 몇 번<br>해야 하나요?</h1><p class="guide-answer">사진을 모은 뒤 <strong>1회</strong>,<br>데이터가 바뀌면 <strong>다시 1회</strong>.</p><p class="guide-intro">현재 앱은 등록된 사진으로 로컬 분류기를 새로 만드는 방식이에요. 같은 데이터로 버튼을 여러 번 눌러도 학습이 누적되지는 않아요.</p><div class="guide-hero-actions"><a class="button primary" href="/training">내 데이터로 학습하기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a><a class="text-button" href="#guide-minimum">필요한 사진 수 확인</a></div></div>
+      
+    </section>
+<aside id="guide-readiness" class="guide-readiness" aria-labelledby="guide-readiness-title" data-minimum-photos="{{ minimum_per_label }}" data-minimum-groups="{{ minimum_groups_per_label }}" data-minimum-total-groups="{{ minimum_groups_total }}">
+        <div class="guide-readiness-body" tabindex="0" role="region" aria-label="내 학습 준비 현황">
+        <div class="guide-readiness-heading"><span class="guide-card-icon" aria-hidden="true"><svg><use href="/static/icons.svg#layers"/></svg></span><h2 id="guide-readiness-title">내 학습 준비 상태</h2></div>
+        <span id="guide-model-state" class="tag neutral">계정 확인 중</span><p id="guide-status-summary" class="guide-status-summary">로그인 상태를 확인하고 있어요.</p>
+        <div id="guide-metrics" class="guide-metrics" hidden>
+          <div class="guide-meter"><div><span>기준 사진</span><strong id="guide-reference-count">—</strong></div><progress id="guide-reference-progress" max="{{ minimum_per_label }}" value="0" aria-label="기준 사진 준비 수"></progress></div>
+          <div class="guide-meter"><div><span>탈모 의심 사진</span><strong id="guide-concern-count">—</strong></div><progress id="guide-concern-progress" max="{{ minimum_per_label }}" value="0" aria-label="탈모 의심 사진 준비 수"></progress></div>
+          <div class="guide-group-grid"><div><span>기준 사람 그룹</span><strong id="guide-reference-groups">—</strong></div><div><span>의심 사람 그룹</span><strong id="guide-concern-groups">—</strong></div></div><p id="guide-total-groups" class="guide-total-groups"></p>
+        </div>
+        <p id="guide-data-message" class="guide-data-message" role="status" aria-live="polite" hidden></p><p id="guide-last-trained" class="guide-last-trained" hidden></p>
+        </div>
+        <div class="guide-readiness-actions">
+        <a id="guide-login" class="button secondary" href="/login?next=%2Ftraining-guide">로그인하고 내 상태 확인</a><a id="guide-training" class="button primary" href="/training" hidden>로컬 학습 페이지로</a><button id="guide-refresh" class="text-button guide-refresh" type="button" hidden>준비 상태 다시 확인</button>
+        <noscript><p class="guide-data-message">아래 설명은 그대로 읽을 수 있어요. 내 데이터 상태를 보려면 JavaScript를 켜 주세요.</p></noscript>
+        </div>
+      </aside>
+<div class="guide-reading-panel">
+
+    <nav class="guide-section-nav" aria-label="학습 가이드 목차"><a href="#guide-minimum">01 사진 준비</a><a href="#guide-frequency">02 학습 시점</a><a href="#guide-steps">03 사용 순서</a><a href="#guide-faq">04 자주 묻는 질문</a></nav>
+    <div class="guide-reading" id="training-guide-reading" tabindex="0" role="region" aria-label="학습 가이드 내용">
+
+    <section id="guide-minimum" class="guide-block" aria-labelledby="guide-minimum-title">
+      <div class="section-heading"><div><span class="section-index">01 / PREPARE</span><h2 id="guide-minimum-title">처음 학습하려면 이렇게 준비해요</h2><p>사진 수와 사람 그룹 조건을 모두 만족해야 해요.</p></div></div>
+      <div class="guide-minimum-grid"><article class="guide-number-card"><span>최소 사진 수</span><strong>{{ minimum_per_label * 2 }}<small>장</small></strong><p>기준 사진 {{ minimum_per_label }}장 + 탈모 의심 사진 {{ minimum_per_label }}장</p></article><article class="guide-number-card"><span>라벨마다 필요한 사람 그룹</span><strong>{{ minimum_groups_per_label }}<small>개 이상</small></strong><p>기준·의심 각각 서로 다른 사람 그룹을 준비해요.</p></article><article class="guide-number-card"><span>전체 사람 그룹</span><strong>{{ minimum_groups_total }}<small>개 이상</small></strong><p>같은 사람의 사진은 언제나 같은 코드로 묶어요.</p></article></div>
+      <div class="guide-example"><div class="guide-example-copy"><span class="tag blue">최소 구성 예시</span><h3>사람별 코드를 나눠서 등록해요</h3><p>예시의 p001~p004는 서로 다른 사람이에요. 실제 이름 대신 익명 코드를 사용하세요. 이 표는 준비 방법을 설명하는 예시이며 저장된 학습 데이터가 아니에요.</p></div><div class="table-scroll"><table><thead><tr><th scope="col">사람 그룹</th><th scope="col">직접 선택한 라벨</th><th scope="col">사진 수</th></tr></thead><tbody><tr><th scope="row">p001</th><td>기준 사진</td><td>{{ minimum_per_label - 2 }}장</td></tr><tr><th scope="row">p002</th><td>기준 사진</td><td>2장</td></tr><tr><th scope="row">p003</th><td>탈모 의심 사진</td><td>{{ minimum_per_label - 2 }}장</td></tr><tr><th scope="row">p004</th><td>탈모 의심 사진</td><td>2장</td></tr></tbody></table></div></div>
+      <p class="guide-note"><svg aria-hidden="true"><use href="/static/icons.svg#info"/></svg>{{ minimum_per_label * 2 }}장은 실행을 위한 최소 조건이에요. 사진 수만으로 진단 정확도가 보장되지는 않아요. 사용 권한이 있는 사진으로, 두 라벨의 촬영 조건을 비슷하게 맞춰 주세요.</p>
+    </section>
+
+    <section id="guide-frequency" class="guide-block" aria-labelledby="guide-frequency-title">
+      <div class="section-heading"><div><span class="section-index">02 / WHEN TO TRAIN</span><h2 id="guide-frequency-title">이럴 때 한 번 더 학습해요</h2><p>횟수를 채우는 방식이 아니라 데이터가 달라졌을 때 갱신해요.</p></div></div>
+      <div class="guide-scenario-grid"><article class="guide-scenario"><span class="guide-scenario-number">01</span><h3>처음 데이터를 준비했어요</h3><p>최소 사진·사람 그룹 조건을 확인한 뒤 학습 버튼을 한 번 눌러요.</p><span class="guide-decision">학습 1회</span></article><article class="guide-scenario"><span class="guide-scenario-number">02</span><h3>사진을 추가·삭제했어요</h3><p>데이터가 바뀌면 기존 모델의 분류를 잠시 막아요. 현재 데이터로 다시 학습해 주세요.</p><span class="guide-decision">변경 후 1회</span></article><article class="guide-scenario"><span class="guide-scenario-number">03</span><h3>사진이 바뀌지 않았어요</h3><p>학습 완료 상태라면 바로 분류하면 돼요. 같은 데이터로 반복해도 새 정보가 생기지는 않아요.</p><span class="guide-decision neutral">추가 학습 불필요</span></article><article class="guide-scenario"><span class="guide-scenario-number">04</span><h3>저장 후 자동 학습이 완료됐어요</h3><p>‘데이터가 충분하면 저장 후 분류기도 학습’을 선택했고 완료 안내가 보이면 그대로 사용해요.</p><span class="guide-decision neutral">따로 누르지 않아도 돼요</span></article></div>
+      <div class="guide-batch-tip"><svg aria-hidden="true"><use href="/static/icons.svg#layers"/></svg><div><strong>여러 장을 모아 학습하려면</strong><p>분석 화면의 저장 후 자동 학습 선택을 해제하고 사진을 모아 저장한 뒤, 로컬 학습 페이지에서 한 번 학습하면 돼요. 새 데이터가 추가되면 이전 모델은 재학습 전까지 사용하지 않아요.</p></div></div>
+    </section>
+
+    <section id="guide-steps" class="guide-block" aria-labelledby="guide-steps-title">
+      <div class="section-heading"><div><span class="section-index">03 / START HERE</span><h2 id="guide-steps-title">촬영에서 분류까지, 네 단계</h2></div></div>
+      <ol class="guide-steps"><li><span>1</span><div><h3>사진을 촬영하거나 선택해요</h3><p>로그인 후 ‘내 헤어라인 살펴보기’에서 시작해요. 한 데이터 모음에서는 정면·정수리 등 촬영 부위와 조명·거리·크기를 되도록 일정하게 맞춰 주세요.</p></div></li><li><span>2</span><div><h3>라벨과 사람 그룹을 지정해요</h3><p>‘이 사진으로 로컬 학습하기’에서 라벨을 직접 선택하고 익명 그룹을 입력해요. 같은 사람을 다른 코드로 나누지 마세요. 라벨을 고치려면 해당 사진을 삭제한 뒤 올바른 라벨로 다시 등록해요.</p></div></li><li><span>3</span><div><h3>저장하고 조건이 모이면 한 번 학습해요</h3><p>‘이 사진을 학습용으로 저장’ 또는 분석 후 저장을 선택해요. 충분한 데이터가 모이면 자동 학습을 사용하거나 로컬 학습 페이지에서 실행해요. 저장과 모델 학습은 각각의 상태로 안내돼요.</p></div></li><li><span>4</span><div><h3>학습 완료 후 새 사진으로 확인해요</h3><p>분석 화면의 ‘로컬 모델로 분류’를 사용해요. ‘학습된 로컬 분류 결과를 Gemini에 함께 전송’을 선택하면 AI 관찰의 참고 자료로 보낼 수 있어요. 학습용 사진 자체를 평가용 새 사진으로 간주하지 마세요.</p></div></li></ol>
+      <div class="guide-storage"><svg aria-hidden="true"><use href="/static/icons.svg#shield"/></svg><div><strong>내 사진은 어디에 저장되나요?</strong><p>분석 화면에서 저장한 사진은 <code>data/training/users/&lt;계정 ID&gt;/학습/</code>에, 학습 페이지에서 직접 등록한 사진은 같은 계정의 <code>photos/</code>에 보관돼요. 로컬 학습의 ‘등록한 사진 목록’에서 삭제할 수 있어요.</p></div></div>
+    </section>
+
+    <section id="guide-faq" class="guide-block" aria-labelledby="guide-faq-title">
+      <div class="section-heading"><div><span class="section-index">04 / FAQ</span><h2 id="guide-faq-title">학습 전에 자주 궁금한 것들</h2></div></div>
+      <div class="guide-faq-list"><details open><summary>학습 버튼을 10번, 100번 누르면 더 좋아지나요?<svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><p>현재 앱은 누를 때마다 등록된 데이터로 새 SVM 모델을 만들어요. 이전 모델에 학습 횟수가 누적되는 방식이 아니어서 같은 데이터로 반복 실행할 필요가 없어요. 데이터의 구분과 촬영 조건, 라벨 검토가 먼저예요.</p></details><details><summary>제 사진만 많이 찍었는데 왜 학습이 안 되나요?<svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><p>현재 모델은 각 라벨 {{ minimum_per_label }}장 이상·사람 그룹 {{ minimum_groups_per_label }}개 이상, 전체 {{ minimum_groups_total }}개 사람 그룹을 요구해요. 같은 사람이 학습·검증 양쪽에 들어가지 않도록 나누기 위해서예요. 한 사람의 사진을 여러 코드로 나누어 조건을 맞추면 검증이 왜곡돼요. 사진 저장은 가능하지만 조건이 부족하면 학습은 대기해요.</p></details><details><summary>최소 사진 수를 채우면 정확한 탈모 판별이 되나요?<svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><p>이 수치는 학습 실행을 위한 최소 조건이에요. 표시되는 수치는 사람 그룹을 분리한 보류 사진에서 사용자 라벨과 일치한 비율이며 의료적 정확도가 아니에요. 결과는 조명·배경·촬영 구도의 영향을 받을 수 있어요.</p></details><details><summary>사진이 충분한데도 학습이 실패하면 어떻게 하나요?<svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><p>두 라벨이 학습용·검증용에 모두 포함될 수 있는지 사람 그룹과 라벨 구성을 확인해 주세요. 오류 안내를 확인한 뒤 다시 시도할 수 있어요. ‘사진은 저장했지만 학습 실패’ 안내가 나온 경우 이미 등록한 사진은 다시 저장하지 않아도 돼요.</p></details><details><summary>Gemini도 같이 재학습되나요?<svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><p>여기서 학습하는 것은 내 컴퓨터의 HOG·선형 SVM 사진 분류기예요. Gemini 모델은 이 기능으로 재학습되지 않아요. Gemini 호출 오류가 나도 로컬 학습을 다시 할 필요는 없으며, 학습된 로컬 분류기는 별도로 사용할 수 있어요.</p></details></div>
+    </section>
+    <div class="guide-bottom-cta"><div><h2>준비됐으면, 한 번 시작해 볼까요?</h2><p>사진을 모으고 라벨·그룹을 확인한 뒤 학습해요.</p></div><a class="button primary" href="/training">로컬 학습으로 이동<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></div>
+    </div>
+    </div>
+    </div>
+  </main>
+  <footer><div class="container footer-inner"><a href="/" class="footer-brand">hairline lab</a><a href="/guide">서비스 이용 안내</a><span>현재 로컬 분류기 기준 · 사진 기반 참고 도구</span></div></footer>
+</body>
+</html>

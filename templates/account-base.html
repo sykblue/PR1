@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>{% block title %}{% endblock %} · Hairline Lab</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/page-experience.css">
+  <script src="/static/page-experience.js"></script>
+  <link rel="stylesheet" href="/static/account-page.css">
+  <script src="/static/account-page.js" defer></script>
+</head>
+<body class="auth-page viewport-page">
+  <div class="visually-hidden" data-page-announcement role="status" aria-live="polite"></div>
+  <a class="skip-link" href="#account-form">입력 양식으로 건너뛰기</a>
+  <header class="site-header auth-header">
+    <div class="header-inner">
+    <a class="wordmark" href="/" aria-label="Hairline Lab 홈으로">hairline<span class="wordmark-light">lab</span></a>
+    <nav aria-label="주요 메뉴"><a href="/analysis" class="nav-link">사진 분석</a><a href="/simulation" class="nav-link">변화 미리보기</a><a href="/training" class="nav-link">로컬 학습</a><a href="/guide" class="nav-link">이용 안내</a></nav>
+    <div class="auth-navigation"><a class="auth-home" href="{{ return_to }}"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg>돌아가기</a></div>
+    </div>
+  </header>
+  <main class="auth-main" data-page-content data-page-kind="account">
+    <div class="page-skeleton" data-page-skeleton aria-hidden="true"><div class="page-sk-grid"><div class="page-sk-card"><i class="sk-shape sk-caption"></i><i class="sk-shape sk-title"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><i class="sk-shape sk-media"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-action"></i><i class="sk-shape sk-line sk-short"></i></div></div></div>
+    <section class="auth-card" aria-labelledby="account-title">
+      <div class="auth-intro" tabindex="0" role="region" aria-labelledby="account-title">
+      <span class="auth-eyebrow">나를 알아가는 작은 관찰</span>
+      <h1 id="account-title">{% block heading %}{% endblock %}</h1>
+      <p class="auth-description">{% block description %}{% endblock %}</p>
+      <img class="auth-illustration" src="/static/report-octopus.svg" width="360" height="250" alt="" aria-hidden="true">
+      <p class="auth-footer">헤어라인의 작은 변화를 차분히 기록해 보세요.</p>
+      </div>
+      <div class="auth-form-panel">
+      {% block form %}{% endblock %}
+      <p class="auth-switch">{% block switch %}{% endblock %}</p>
+      <noscript><p class="auth-message">이 페이지를 이용하려면 브라우저에서 JavaScript를 켜 주세요.</p></noscript>
+      </div>
+    </section>
+    
+  </main>
+</body>
+</html>

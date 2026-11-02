@@ -1,0 +1,25 @@
+.env
+.env.*
+!.env.example
+.venv/
+.venv-vlm/
+.python/
+.uv-cache/
+.cache/
+__pycache__/
+*.pyc
+models/*.tflite
+models/sd-*/
+models/ocr/
+models/vlm-base/
+uploads/
+outputs/
+test-artifacts/
+.streamlit/secrets.toml
+data/training/
+data/vision-training/
+data/scalp-training/
+models/scalp-classifier/
+탈모 데이터셋/
+data/*.sqlite*
+data/.session_secret

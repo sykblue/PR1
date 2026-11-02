@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>내 정보 · Hairline Lab</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/page-experience.css">
+  <script src="/static/page-experience.js"></script>
+  <link rel="stylesheet" href="/static/account-camera.css">
+  <link rel="stylesheet" href="/static/profile.css">
+  <script src="/static/auth.js" defer></script>
+  <script src="/static/realtime.js" defer></script>
+  <script src="/static/profile.js" defer></script>
+</head>
+<body class="profile-page viewport-page">
+  <div class="visually-hidden" data-page-announcement role="status" aria-live="polite"></div>
+  <a class="skip-link" href="#profile-content">내 정보 본문으로 건너뛰기</a>
+  <header class="site-header"><div class="header-inner">
+    <a class="wordmark" href="/" aria-label="Hairline Lab 홈으로">hairline<span class="wordmark-light">lab</span></a>
+    <nav aria-label="주요 메뉴"><a href="/analysis" class="nav-link">사진 분석</a><a href="/simulation" class="nav-link">변화 미리보기</a><a href="/training" class="nav-link">로컬 학습</a><a href="/guide" class="nav-link">이용 안내</a></nav>
+    <div class="account-actions"><a id="account-name" class="account-profile" href="/profile" aria-current="page">{{ profile.username }}님</a><a id="account-login" href="/login?next=%2Fprofile" class="text-button" hidden>로그인</a><a id="account-register" href="/register?next=%2Fprofile" class="text-button account-register" hidden>회원가입</a><button id="account-logout" type="button" class="text-button">로그아웃</button></div>
+  </div></header>
+  <main class="container profile-main" id="profile-content" data-profile-user-id="{{ profile.id }}" data-page-content data-page-kind="profile">
+    <div class="page-skeleton" data-page-skeleton aria-hidden="true"><div class="page-sk-toolbar"><i class="sk-shape sk-title"></i><i class="sk-shape sk-caption"></i></div><div class="page-sk-grid"><div class="page-sk-card"><i class="sk-shape sk-avatar"></i><i class="sk-shape sk-title"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><i class="sk-shape sk-action"></i></div><div class="page-sk-card"><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><i class="sk-shape sk-title"></i><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div></div></div></div>
+    <p id="account-message" class="account-notice" role="status" aria-live="polite" hidden></p>
+    <div class="profile-page-heading"><div><span class="section-index">MY ACCOUNT</span><h1>내 정보</h1><p>나의 계정과 차곡차곡 쌓인 관찰을 확인해 보세요.</p></div><a href="/" class="profile-back">홈으로 돌아가기<svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a></div>
+    <div class="profile-layout">
+      <aside class="profile-identity" aria-label="내 계정 요약">
+        <div class="profile-identity-body" tabindex="0" role="region" aria-label="내 계정 기본 현황">
+        <span class="profile-avatar" aria-hidden="true">{{ profile.username[0]|upper }}</span>
+        <span class="profile-account-badge">나의 로컬 계정</span>
+        <h2>{{ profile.username }}<span>님</span></h2>
+        <p>오늘의 작은 관찰을<br>나만의 기록으로 남겨 보세요.</p>
+        <div class="profile-joined"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#clock"/></svg><span><time datetime="{{ profile.created_at }}">{{ joined_on }}</time> 가입</span></div>
+        </div>
+        <a href="/analysis" class="button primary">새로운 관찰 시작<svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a>
+      </aside>
+      <div class="profile-details">
+        <section class="profile-stats" aria-label="나의 활동 현황">
+          <a class="profile-stat" href="/#history"><span class="profile-stat-icon" aria-hidden="true"><svg><use href="/static/icons.svg#report"/></svg></span><span class="profile-stat-label">저장한 리포트</span><strong>{{ profile.report_count }}<small>개</small></strong><span class="profile-stat-link">내 기록 보기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></a>
+          <a class="profile-stat" href="/training"><span class="profile-stat-icon" aria-hidden="true"><svg><use href="/static/icons.svg#layers"/></svg></span><span class="profile-stat-label">학습용 사진</span><strong>{{ training.total }}<small>장</small></strong><span class="profile-stat-link">사진 관리하기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></a>
+          <a class="profile-stat" href="/training-guide"><span class="profile-stat-icon" aria-hidden="true"><svg><use href="/static/icons.svg#sparkles"/></svg></span><span class="profile-stat-label">로컬 모델</span><strong class="profile-model-state">{% if training.model_ready %}사용 가능{% elif training.model_stale %}재학습 필요{% else %}학습 전{% endif %}</strong><span class="profile-stat-link">학습 상태 확인<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></span></a>
+        </section>
+        <section class="panel profile-account-panel" aria-labelledby="profile-account-title" tabindex="0"><div class="profile-panel-heading"><h2 id="profile-account-title">기본 정보</h2><span>계정 정보</span></div><dl class="profile-info-list">
+          <div><dt>아이디</dt><dd>{{ profile.username }}</dd></div>
+          <div><dt>가입일</dt><dd><time datetime="{{ profile.created_at }}">{{ joined_on }}</time></dd></div>
+          <div><dt>로그인 방식</dt><dd>아이디 · 비밀번호</dd></div>
+          <div><dt>최근 리포트 저장</dt><dd>{% if last_report_on %}<time datetime="{{ profile.last_report_at }}">{{ last_report_on }}</time>{% else %}<span class="profile-empty-value">아직 저장한 리포트가 없어요</span>{% endif %}</dd></div>
+        </dl></section>
+        <section class="profile-record-note" aria-labelledby="profile-record-title"><span class="profile-note-icon" aria-hidden="true"><svg><use href="/static/icons.svg#shield"/></svg></span><div><h2 id="profile-record-title">내 계정으로 모아 보는 기록</h2><p>저장을 선택한 관찰 리포트와 학습 사진은 내 계정에 연결돼요. 분석 사진도 함께 저장하도록 선택한 경우 리포트에서 다시 볼 수 있어요.</p></div><a href="/#history" class="profile-note-link" aria-label="내 분석 기록 보기"><svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></section>
+      </div>
+    </div>
+  </main>
+  <footer><div class="container footer-inner"><a href="/" class="footer-brand">hairline lab</a><span>오늘의 모습을 이해하는 작은 실험</span><span>사진 기반 참고 도구 · 의료 진단 목적 아님</span></div></footer>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="250" viewBox="0 0 360 250" fill="none">
+  <title>관찰 노트를 든 귀여운 파란 문어</title>
+  <desc>동그란 머리와 여덟 개의 짧은 팔, 반짝이는 눈과 분홍빛 볼을 가진 파란 문어가 작은 노트를 들고 미소 짓고 있어요.</desc>
+  <circle cx="176" cy="119" r="93" fill="#f3f7ff"/>
+  <path d="M82 201c21-9 41-8 57-5m84 0c20-4 35-1 47 5" stroke="#e1ebfc" stroke-width="2" stroke-linecap="round"/>
+  <ellipse cx="176" cy="220" rx="91" ry="10" fill="#e8f0fd"/>
+  <g fill="#a9ceff" stroke="#669fee" stroke-width="1.7" stroke-linejoin="round">
+    <path d="M127 142c-14 3-26-5-28-17-1-8-10-12-15-5-9 13 2 36 21 42l23 3Z"/>
+    <path d="M223 142c14 3 25-5 28-17 2-8 10-11 15-4 8 13-3 35-22 41l-22 3Z"/>
+    <path d="M125 158c-14 1-29 1-37 10-6 7-14 8-20 5-7-4-14 1-11 8 5 13 25 15 38 5 8-6 20-5 32-5Z"/>
+    <path d="M225 158c14 1 29 1 37 10 6 7 14 8 20 5 7-4 14 1 11 8-5 13-25 15-38 5-8-6-20-5-32-5Z"/>
+    <path d="M140 172c-9 8-14 21-25 25-8 3-14 0-17 4-4 6 3 13 12 13 20 1 29-18 42-23Z"/>
+    <path d="M210 172c9 8 14 21 25 25 8 3 14 0 17 4 4 6-3 13-12 13-20 1-29-18-42-23Z"/>
+    <path d="M160 176c-5 10-5 22-13 28-5 4-11 4-12 10-1 7 7 11 15 7 15-6 20-21 26-32Z"/>
+    <path d="M190 176c5 10 5 22 13 28 5 4 11 4 12 10 1 7-7 11-15 7-15-6-20-21-26-32Z"/>
+  </g>
+  <g fill="#d6e7ff"><ellipse cx="112" cy="199" rx="4" ry="2.6" transform="rotate(-30 112 199)"/><ellipse cx="104" cy="205" rx="3.3" ry="2.3" transform="rotate(-20 104 205)"/><ellipse cx="237" cy="200" rx="4" ry="2.6" transform="rotate(30 237 200)"/><ellipse cx="245" cy="206" rx="3.3" ry="2.3" transform="rotate(20 245 206)"/><ellipse cx="151" cy="212" rx="3" ry="2.3" transform="rotate(-35 151 212)"/><ellipse cx="201" cy="212" rx="3" ry="2.3" transform="rotate(35 201 212)"/></g>
+  <path d="M114 128c0-47 23-77 61-77s61 30 61 77c0 35-24 62-61 62s-61-27-61-62Z" fill="#b9d9ff" stroke="#669fee" stroke-width="1.8"/>
+  <path d="M126 100c5-19 18-31 34-35" stroke="#eaf4ff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M121 153c10 22 28 34 54 34s45-12 55-34c-15 9-34 13-55 13s-40-4-54-13Z" fill="#a9ceff"/>
+  <ellipse cx="137" cy="143" rx="11" ry="6" fill="#ffd1d5"/>
+  <ellipse cx="213" cy="143" rx="11" ry="6" fill="#ffd1d5"/>
+  <ellipse cx="151" cy="127" rx="7" ry="9" fill="#264b7d"/>
+  <ellipse cx="199" cy="127" rx="7" ry="9" fill="#264b7d"/>
+  <circle cx="153" cy="124" r="2.2" fill="#fff"/>
+  <circle cx="201" cy="124" r="2.2" fill="#fff"/>
+  <path d="M166 145c3 7 15 7 18 0" stroke="#264b7d" stroke-width="2.8" stroke-linecap="round"/>
+  <path d="M143 110c4-3 8-3 12-1m40 0c4-2 8-2 12 1" stroke="#669fee" stroke-width="2" stroke-linecap="round"/>
+  <g transform="rotate(12 259 124)">
+    <rect x="236" y="91" width="47" height="62" rx="8" fill="#fff" stroke="#8fb4ec" stroke-width="1.6"/>
+    <rect x="248" y="85" width="23" height="12" rx="4" fill="#e3eeff" stroke="#8fb4ec" stroke-width="1.4"/>
+    <path d="m244 109 3 3 5-6m-8 16 3 3 5-6" stroke="#3981ec" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M258 109h14m-14 13h14m-27 14h27" stroke="#c1d6f5" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <path d="M245 153c5 2 12 0 14-5 2-4 0-8-4-8-3 0-6 4-9 3" fill="#a9ceff" stroke="#669fee" stroke-width="1.6" stroke-linecap="round"/>
+  <g stroke="#a6c5ff" stroke-width="1.8" stroke-linecap="round"><path d="M91 71v10m-5-5h10m165-23v8m-4-4h8"/><circle cx="76" cy="113" r="3.5"/><circle cx="281" cy="80" r="4.5"/></g>
+  <circle cx="112" cy="44" r="3" fill="#d8e7ff"/>
+  <circle cx="282" cy="204" r="3" fill="#d8e7ff"/>
+</svg>

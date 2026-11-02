@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="사진에서 헤어라인과 두피 노출을 살펴보고 가상의 모발 변화를 비교하는 로컬 도구">
+  <meta name="theme-color" content="#ffffff">
+  <title>사진 분석 · Hairline Lab</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/page-experience.css">
+  <script src="/static/page-experience.js"></script>
+  <link rel="stylesheet" href="/static/analysis-page.css">
+  <link rel="stylesheet" href="/static/account-camera.css">
+  <link rel="stylesheet" href="/static/analysis-theme.css">
+  <link rel="stylesheet" href="/static/recommendations-dialog.css">
+  <script src="/static/auth.js" defer></script>
+  <script src="/static/realtime.js" defer></script>
+  <script src="/static/analysis-tools.js" defer></script>
+  <script src="/static/photo-handoff.js" defer></script>
+  <script src="/static/analysis-links.js" defer></script>
+  <script src="/static/analysis-recommendations.js" defer></script>
+  <script src="/static/medicine-catalog-data.js" defer></script>
+  <script src="/static/medicine-catalog.js" defer></script>
+  <script src="/static/app.js" defer></script>
+  <script src="/static/camera.js" defer></script>
+  <script src="/static/navigation.js" defer></script>
+</head>
+<body class="analysis-page">
+  <div class="visually-hidden" data-page-announcement role="status" aria-live="polite"></div>
+  <a class="skip-link" href="#analysis-content">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="/" aria-label="Hairline Lab 홈으로">hairline<span class="wordmark-light">lab</span></a>
+      <nav aria-label="주요 메뉴"><a href="/analysis" data-nav-section="analysis" data-nav-default="true" class="nav-link active" aria-current="page">사진 분석</a><a href="/simulation" class="nav-link">변화 미리보기</a><a href="/training" class="nav-link">로컬 학습</a><a href="/guide" class="nav-link">이용 안내</a></nav>
+      <div class="account-actions"><a id="account-name" class="account-profile" href="/profile" aria-label="내 정보" hidden></a><a id="account-login" href="/login?next=%2Fanalysis" class="text-button">로그인</a><a id="account-register" href="/register?next=%2Fanalysis" class="text-button account-register">회원가입</a><button id="account-history" type="button" class="text-button" hidden>내 기록</button><button id="account-logout" type="button" class="text-button" hidden>로그아웃</button></div>
+    </div>
+  </header>
+  <div class="app-layout" id="app-layout">
+  <main class="container" id="analysis-content" data-page-content data-page-kind="analysis">
+    <div class="page-skeleton" data-page-skeleton aria-hidden="true"><div class="page-sk-toolbar"><i class="sk-shape sk-title"></i><i class="sk-shape sk-caption"></i></div><div class="page-sk-grid"><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-media"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><i class="sk-shape sk-action"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><i class="sk-shape sk-field"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><i class="sk-shape sk-action"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-caption"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><div class="page-sk-section"><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div></div><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div></div></div></div>
+    <p id="account-message" class="account-notice" role="status" aria-live="polite" hidden></p>
+    <div class="analysis-toolbar">
+    <ol class="analysis-workflow" aria-label="사진 분석 진행 단계">
+      <li data-analysis-step="photo" aria-current="step"><span>01</span><div><strong>사진 준비</strong><p>업로드 또는 직접 촬영</p></div></li>
+      <li data-analysis-step="settings"><span>02</span><div><strong>관찰 설정</strong><p>살펴볼 부위와 저장 선택</p></div></li>
+      <li data-analysis-step="report"><span>03</span><div><strong>리포트 확인</strong><p>관찰 내용과 다음 행동</p></div></li>
+    </ol>
+      <div class="analysis-section-tools"><span class="service-state" id="service-state"><span class="status-dot pending"></span>연결 확인 중</span><a class="analysis-guide-link" href="/guide#photo-guide"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#info"/></svg>촬영·이용 안내<svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a>
+      </div>
+    </div>
+
+    <section id="analysis" class="analysis-section" aria-labelledby="analysis-title">
+      <h1 class="visually-hidden" id="analysis-title">사진 분석</h1>
+      <div class="workspace analysis-workspace">
+        <article class="panel upload-panel" tabindex="0" aria-labelledby="photo-title">
+          <div class="panel-heading"><h3 id="photo-title"><span class="step-number">1</span>사진을 선택해 주세요</h3><span class="small-label">JPG · PNG · WEBP</span></div>
+          <input id="photo-input" type="file" accept="image/jpeg,image/png,image/webp" class="visually-hidden">
+          <div class="camera-entry"><button id="camera-open" type="button" class="button secondary"><svg class="icon"><use href="/static/icons.svg#frame"/></svg>카메라로 촬영</button><span>촬영한 사진을 확인한 뒤 분석해요</span></div><input id="camera-file" type="file" accept="image/jpeg,image/png,image/webp" capture="user" hidden>
+          <button class="dropzone" id="dropzone" type="button" aria-label="분석할 사진 선택, JPG PNG WEBP 10MB 이하">
+            <span class="upload-art"><svg class="portrait-icon" aria-hidden="true"><use href="/static/icons.svg#portrait"/></svg><span class="upload-plus"><svg class="icon"><use href="/static/icons.svg#plus"/></svg></span></span>
+            <strong>사진을 여기에 놓아 주세요</strong><span>또는 클릭해서 내 사진 선택하기</span><span class="file-limit">최대 10MB · 160px 이상</span>
+          </button>
+          <div class="photo-view" id="photo-view" hidden><img id="photo-preview" alt="선택한 사진 미리보기"><span class="photo-view-label" id="photo-view-label">원본 사진</span><button type="button" class="photo-reset" id="photo-reset" aria-label="사진 제거"><svg class="icon"><use href="/static/icons.svg#close"/></svg></button></div>
+          <div class="photo-toolbar" id="photo-toolbar" hidden><div><strong id="photo-name"></strong><span id="photo-meta"></span></div><div class="photo-toolbar-actions"><button type="button" class="text-button" id="change-photo">사진 변경</button><a class="text-button" href="/simulation" id="open-simulation" aria-describedby="handoff-note"><span>변화 비교</span><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a></div><span class="visually-hidden" id="handoff-note">사진은 이 브라우저에 잠시 보관한 뒤 비교 화면으로 옮겨요.</span></div>
+          <div class="photo-tips"><span><svg class="icon"><use href="/static/icons.svg#sun"/></svg>밝은 자연광</span><span><svg class="icon"><use href="/static/icons.svg#frame"/></svg>머리 전체가 보이게</span><span><svg class="icon"><use href="/static/icons.svg#person"/></svg>한 사람만</span></div>
+          <section class="photo-checks" id="photo-checks" aria-labelledby="photo-check-title" hidden>
+            <div><h4 id="photo-check-title">분석 전 사진 점검</h4><span>이 기기에서 확인해요</span></div>
+            <ul><li><svg aria-hidden="true"><use href="/static/icons.svg#frame"/></svg><span>크기</span><strong id="photo-check-resolution"></strong></li><li><svg aria-hidden="true"><use href="/static/icons.svg#sun"/></svg><span>밝기</span><strong id="photo-check-light"></strong></li></ul>
+            <p id="photo-check-note"></p>
+          </section>
+      <div class="segmentation-info" id="segmentation-info" hidden><svg class="icon"><use href="/static/icons.svg#layers"/></svg><p id="segmentation-text"></p><button class="text-button" id="toggle-overlay" type="button">원본 보기</button></div>
+        </article>
+        <article class="panel analysis-settings-panel">
+          <div class="panel-heading"><h3><span class="step-number">2</span>관찰 설정</h3><span class="small-label">내가 필요한 만큼</span></div>
+          <div class="analysis-settings-scroll" id="settings-scroll" tabindex="0" role="region" aria-label="관찰 설정과 추가 옵션">
+          <fieldset class="analysis-focus"><legend>어디를 자세히 살펴볼까요?</legend><p>선택한 부위를 중심으로 관찰해요.</p><div class="analysis-focus-options">
+            <label><input type="radio" name="analysis-focus" value="all" checked><span><svg aria-hidden="true"><use href="/static/icons.svg#scan"/></svg><span class="analysis-choice-copy"><strong>전체적으로</strong><small>헤어라인과 두피 노출을 함께</small></span><i class="analysis-choice-mark" aria-hidden="true"></i></span></label>
+            <label><input type="radio" name="analysis-focus" value="hairline"><span><svg aria-hidden="true"><use href="/static/icons.svg#hairline"/></svg><span class="analysis-choice-copy"><strong>헤어라인</strong><small>앞쪽과 양옆의 모발 경계</small></span><i class="analysis-choice-mark" aria-hidden="true"></i></span></label>
+            <label><input type="radio" name="analysis-focus" value="crown"><span><svg aria-hidden="true"><use href="/static/icons.svg#crown"/></svg><span class="analysis-choice-copy"><strong>정수리·가르마</strong><small>위쪽 모발 사이로 보이는 두피</small></span><i class="analysis-choice-mark" aria-hidden="true"></i></span></label>
+            <label><input type="radio" name="analysis-focus" value="density"><span><svg aria-hidden="true"><use href="/static/icons.svg#density"/></svg><span class="analysis-choice-copy"><strong>모발 분포</strong><small>사진에서 보이는 모발의 분포</small></span><i class="analysis-choice-mark" aria-hidden="true"></i></span></label>
+          </div></fieldset>
+            <div class="analysis-settings-submit">
+              <h4 class="analysis-settings-subtitle">전송과 저장</h4>
+          <div class="consent-row"><input type="checkbox" id="consent"><label for="consent">AI 분석을 위해 사진을 Google Gemini로 전송하는 데 동의해요<span>선택한 로컬 분류 결과도 함께 전송돼요. 무료 API는 서비스 개선에 사용될 수 있어요. <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noreferrer">데이터 이용 안내</a><span id="ollama-fallback-notice" hidden>호출 한도에 도달하면 이 컴퓨터의 로컬 모델로 이어서 관찰해요.</span></span></label></div>
+          <div class="consent-row"><input id="save-history" type="checkbox" disabled><label for="save-history">분석 리포트를 내 계정에 저장해요<span>로그인 후 선택할 수 있어요. 사진 저장은 아래에서 별도로 선택해요.</span></label></div>
+          <div class="consent-row"><input id="save-photo" type="checkbox" disabled><label for="save-photo">이 사진도 내 계정에 함께 저장해요<span>리포트 저장을 선택하면 사용할 수 있어요. 촬영 메타데이터를 제거한 사진을 이 컴퓨터에 보관해요.</span></label></div>
+            </div>
+            <details class="analysis-extra-settings" id="analysis-extra-settings">
+              <summary><span>추가 옵션 · 로컬 기능</span><svg class="analysis-disclosure-chevron" aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary>
+              <div class="analysis-extra-content">
+          <details id="photo-training" class="photo-training">
+            <summary><span><svg aria-hidden="true"><use href="/static/icons.svg#layers"/></svg>이 사진으로 로컬 학습하기</span><svg class="analysis-disclosure-chevron" aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary>
+            <p>촬영하거나 선택한 사진을 학습용으로 저장해요. 라벨은 직접 선택하며, 같은 사람의 사진에는 항상 같은 그룹 코드를 사용해 주세요.</p>
+            <p id="photo-training-login" class="photo-training-login"><a href="/login">로그인</a> 후 학습 사진을 저장할 수 있어요.</p>
+            <div class="photo-training-fields">
+              <div><label for="photo-training-label">사진 라벨</label><select id="photo-training-label"><option value="">직접 선택해 주세요</option><option value="reference">기준 사진</option><option value="concern">탈모 의심 사진 (내 라벨)</option></select></div>
+              <div><label for="photo-training-group">익명 사람 그룹</label><input id="photo-training-group" type="text" maxlength="40" pattern="[A-Za-z0-9_-]+" autocomplete="off" placeholder="예: p001 · 같은 사람은 같은 코드"></div>
+            </div>
+            <div class="consent-row"><input id="photo-training-auto-save" type="checkbox"><label for="photo-training-auto-save">AI 분석 후 이 사진을 학습용으로 저장해요<span>분석 요청이 실패해도 저장해요. 원본의 촬영 메타데이터는 제거돼요.</span></label></div>
+            <div class="consent-row"><input id="photo-training-auto-train" type="checkbox" checked><label for="photo-training-auto-train">데이터가 충분하면 저장 후 분류기도 학습해요<span>라벨별 5장·사람 그룹 2개 이상, 전체 4개 그룹부터 가능해요.</span></label></div>
+            <button id="photo-training-save" class="button secondary" type="button" disabled><span>이 사진을 학습용으로 저장</span></button>
+            <p id="photo-training-message" class="inline-message" role="status" aria-live="polite" hidden></p>
+            <p id="photo-training-folder" class="photo-training-folder">저장을 선택한 사진은 내 계정의 학습 폴더에 보관돼요.</p>
+            <a href="/training" class="text-button">저장된 학습 사진 목록 보기</a>
+            <a href="/training-guide" class="text-button">학습 횟수·사진 수 가이드</a>
+          </details>
+          <details class="analysis-assistance" id="analysis-assistance"><summary><span><svg aria-hidden="true"><use href="/static/icons.svg#report"/></svg>로컬 분류 보조 자료</span><svg class="analysis-disclosure-chevron" aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><p>학습한 로컬 모델의 분류 결과를 AI 분석에 참고할 수 있어요.</p><div class="consent-row"><input id="share-local-result" type="checkbox"><label for="share-local-result">학습된 로컬 분류 결과를 Gemini에 함께 전송해요<span>실험용 사용자 라벨이며 의학적 정답으로 사용하지 않아요</span></label></div><div class="consent-row"><input id="scalp-macro" type="checkbox" disabled aria-describedby="scalp-assist-status"><label for="scalp-macro">확대 두피 사진의 학습 분류 결과를 AI에 함께 전달해요<span>확대 촬영 사진에만 선택해 주세요. 데이터셋 라벨 분류이며 진단 결과가 아니에요.</span></label></div><p id="scalp-assist-status" class="local-assist-note" role="status">참고 모델 준비 상태를 확인하고 있어요.</p></details>
+                <div class="analysis-local-actions"><button type="button" class="button secondary" id="segment-button"><svg class="icon"><use href="/static/icons.svg#layers"/></svg><span>모발 영역 확인</span></button><button id="local-classify-button" class="button secondary" type="button"><span>로컬 모델로 분류</span></button></div>
+                <p class="local-prediction" id="local-prediction" role="status" hidden></p>
+                <p class="local-assist-note">로컬 분류 모델은 <a href="/training">로컬 학습 페이지</a>에서 만들 수 있어요.</p>
+              </div>
+            </details>
+          </div>
+          <div class="analysis-settings-actions">
+            <div class="upload-actions"><button type="button" class="button primary" id="analyze-button"><svg class="icon"><use href="/static/icons.svg#scan"/></svg><span>AI 헤어라인 분석하기</span><svg class="icon arrow"><use href="/static/icons.svg#arrow-right"/></svg></button></div>
+            <p class="privacy-note"><svg class="icon"><use href="/static/icons.svg#shield"/></svg>학습용 저장을 선택한 사진만 계정별로 보관해요</p>
+          </div>
+        </article>
+        <article class="panel report-panel" id="report-panel" aria-labelledby="report-title">
+          <div class="panel-heading"><h3 id="report-title"><span class="step-number">3</span>나의 관찰 리포트</h3><span class="tag neutral" id="report-tag">분석 전</span></div>
+          <div class="analysis-report-body">
+          <div class="inline-message" id="analysis-message" role="status" aria-live="polite" hidden></div>
+          <div class="report-empty" id="report-empty"><div class="analysis-empty-art" aria-hidden="true"><img src="/static/report-octopus.svg" width="360" height="250" alt="" decoding="async"></div><span class="report-empty-eyebrow">차근차근, 함께 살펴봐요</span><h4>사진 한 장, 관찰의 시작</h4><p>사진을 선택하고 분석을 시작하면<br>나의 관찰 리포트가 이곳에 정리돼요.</p><div class="report-preview-list" aria-label="리포트에서 확인할 내용"><span><svg aria-hidden="true"><use href="/static/icons.svg#hairline"/></svg>관찰 내용</span><span><svg aria-hidden="true"><use href="/static/icons.svg#info"/></svg>사진의 한계</span><span><svg aria-hidden="true"><use href="/static/icons.svg#report"/></svg>다음 행동</span></div></div>
+          <div class="report-loading" id="report-loading" role="status" hidden><div class="async-skeleton" aria-hidden="true"><i class="sk-shape sk-title"></i><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-short"></i></div><h4>사진을 살펴보고 있어요</h4><p>조명과 촬영 각도를 함께 고려하고 있어요.<br>잠시만 기다려 주세요.</p></div>
+          <div class="report-content" id="report-content" hidden><div class="analysis-report-details" id="report-details" tabindex="0" role="region" aria-label="관찰 리포트 내용"><div class="result-summary"><span class="tag" id="signal-tag"></span><h4 id="result-summary"></h4></div><div id="observations" class="observations"></div><div class="result-note"><svg class="icon"><use href="/static/icons.svg#info"/></svg><div><strong>사진에는 한계가 있어요</strong><ul id="limitations"></ul></div></div><div class="next-steps"><h4>다음에는 이렇게 해 보세요</h4><ul id="next-steps"></ul></div>
+            <div class="recommendation-entry" id="recommendations" role="group" aria-label="병원·치료제 안내" hidden>
+              <button class="recommendation-entry-button" id="recommendation-open-clinics" type="button" aria-haspopup="dialog" aria-controls="recommendation-dialog"><span class="recommendation-entry-icon" aria-hidden="true"><svg><use href="/static/icons.svg#map-pin"/></svg></span><span><strong>병원 찾기</strong><small>현재 위치로 찾기</small></span><svg class="recommendation-entry-arrow" aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></button>
+              <button class="recommendation-entry-button" id="recommendation-open-medicines" type="button" aria-haspopup="dialog" aria-controls="recommendation-dialog"><span class="recommendation-entry-icon" aria-hidden="true"><svg><use href="/static/icons.svg#capsule"/></svg></span><span><strong>약·치료제 안내</strong><small>상담 전 알아보기</small></span><svg class="recommendation-entry-arrow" aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></button>
+            </div>
+          </div><div class="report-footer"><span id="analysis-meta"></span><div class="report-actions"><button type="button" class="text-button" id="copy-report">내용 복사</button><button type="button" class="text-button" id="export-report-text">텍스트 저장</button><button type="button" class="text-button" id="download-report"><svg class="icon"><use href="/static/icons.svg#download"/></svg>리포트 저장</button></div></div></div>
+          </div>
+          <div class="report-disclaimer"><svg class="icon"><use href="/static/icons.svg#info"/></svg><p>AI의 시각적 관찰이며 의료 진단이 아니에요. 갑작스러운 변화나 걱정이 지속되면 피부과에서 상담해 주세요.</p></div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+  </div>
+  <footer><div class="container footer-inner"><a href="/" class="footer-brand">hairline lab</a><span>오늘의 모습을 이해하는 작은 실험</span><span>사진 기반 참고 도구 · 의료 진단 목적 아님</span></div></footer>
+  <dialog class="recommendation-dialog" id="recommendation-dialog" aria-labelledby="recommendation-dialog-title">
+    <header class="recommendation-dialog-header">
+      <div class="recommendation-dialog-heading"><h2 id="recommendation-dialog-title" tabindex="-1">진료 안내</h2></div>
+      <button class="recommendation-dialog-close" id="recommendation-close" type="button" aria-label="진료 안내 닫기"><svg aria-hidden="true"><use href="/static/icons.svg#close"/></svg></button>
+    </header>
+    <div class="recommendation-dialog-body">
+      <div class="recommendation-main">
+        <div class="recommendation-tabs" id="recommendation-tabs" role="tablist" aria-label="추천 안내 선택">
+          <button id="recommendation-tab-clinics" type="button" role="tab" aria-selected="true" aria-controls="recommendation-panel-clinics" tabindex="0"><svg aria-hidden="true"><use href="/static/icons.svg#map-pin"/></svg>병원 찾기</button>
+          <button id="recommendation-tab-medicines" type="button" role="tab" aria-selected="false" aria-controls="recommendation-panel-medicines" tabindex="-1"><svg aria-hidden="true"><use href="/static/icons.svg#capsule"/></svg>약·치료제 안내</button>
+        </div>
+        <section class="recommendation-tab-panel" id="recommendation-panel-clinics" role="tabpanel" aria-labelledby="recommendation-tab-clinics" tabindex="0">
+          <div class="recommendation-search-card">
+            <div class="recommendation-search-copy"><span class="recommendation-location-art" aria-hidden="true"><svg><use href="/static/icons.svg#locate"/></svg></span><h3>내 주변 피부과 찾기</h3><p>가까운 병원의 주소와 연락처를 확인해요.</p></div>
+            <button type="button" class="button primary recommendation-locate" id="recommendation-locate" aria-haspopup="dialog" aria-controls="clinics-dialog" aria-describedby="recommendation-location-summary">내 주변 병원 보기<svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></button>
+          </div>
+          <p class="recommendation-location-summary" id="recommendation-location-summary"><svg aria-hidden="true"><use href="/static/icons.svg#shield"/></svg>버튼을 누를 때만 위치를 확인하며, 위치는 저장하지 않아요.</p>
+          <section class="recommendation-visit-check" aria-labelledby="recommendation-visit-title"><h3 id="recommendation-visit-title">방문 전 확인</h3><ul><li><svg aria-hidden="true"><use href="/static/icons.svg#chat"/></svg><span><strong>진료·상담</strong><small>피부과 진료와 탈모 상담 가능 여부</small></span></li><li><svg aria-hidden="true"><use href="/static/icons.svg#clock"/></svg><span><strong>예약·운영 시간</strong><small>예약 가능 시간과 실제 운영 여부</small></span></li></ul><p class="recommendation-privacy">공개 자료에 등록된 병원을 거리순으로 보여드려요. 치료 효과나 전문성 순위가 아니에요.</p></section>
+          <details class="recommendation-location-notice" id="recommendation-location-notice"><summary>위치 정보 이용 안내<svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><p>약 100m 단위의 위치를 현재 서버에서 거리 계산에만 사용해요. 위치·사진·리포트는 외부 지도 서비스로 전송하지 않아요.</p></details>
+        </section>
+        <section class="recommendation-tab-panel" id="recommendation-panel-medicines" role="tabpanel" aria-labelledby="recommendation-tab-medicines" tabindex="0" hidden>
+          <div class="recommendation-panel-heading"><span class="recommendation-panel-symbol" aria-hidden="true"><svg><use href="/static/icons.svg#capsule"/></svg></span><h3>치료제는 상담부터 차근차근</h3><p>사진만으로 맞는 약이나 용량을 정할 수 없어요. 진료 때 물어볼 일반 정보로 살펴보세요.</p></div>
+          <section class="medicine-catalog" id="medicine-catalog" aria-labelledby="medicine-catalog-title">
+            <div class="medicine-catalog-heading"><h4 id="medicine-catalog-title">탈모 관련 의약품 20종</h4><p>종류와 제조·수입사로 나눠 성분과 제형을 살펴보세요.</p><span id="medicine-verified">식약처 허가정보 기준</span></div>
+            <div class="medicine-catalog-grouping" role="group" aria-label="의약품 목록 분류 방식">
+              <button id="medicine-group-type" type="button" aria-pressed="true" aria-controls="medicine-results">종류별 보기</button>
+              <button id="medicine-group-company" type="button" aria-pressed="false" aria-controls="medicine-results">제조·수입사별 보기</button>
+            </div>
+            <div class="medicine-catalog-controls">
+              <label class="medicine-catalog-search" for="medicine-search">제품 검색<input id="medicine-search" type="search" maxlength="80" autocomplete="off" placeholder="제품명·성분·제조사 검색" aria-controls="medicine-results"></label>
+              <label for="medicine-type">종류<select id="medicine-type" aria-controls="medicine-results"><option value="all">전체 종류</option></select></label>
+              <label for="medicine-company">제조·수입사<select id="medicine-company" aria-controls="medicine-results" aria-describedby="medicine-company-note"><option value="all">전체 제조·수입사</option></select></label>
+            </div>
+            <p class="medicine-company-note" id="medicine-company-note">식약처의 허가 업체명 기준이며, 위탁 제조사는 제품에 따로 표시해요.</p>
+            <div class="medicine-catalog-toolbar"><p id="medicine-count" role="status" aria-live="polite" aria-atomic="true">제품 목록을 준비하고 있어요.</p><button id="medicine-reset" type="button" class="text-button">검색·분류 초기화</button></div>
+            <p class="medicine-catalog-empty" id="medicine-empty" hidden>조건에 맞는 제품이 없어요. 다른 검색어를 입력하거나 분류를 초기화해 주세요.</p>
+            <div id="medicine-results" class="medicine-catalog-results"></div>
+            <p class="medicine-catalog-note">성별·연령 등 사용 조건은 제품마다 달라요. 함량은 제품 정보이며, 실제 사용 여부와 방법은 의사·약사와 확인해 주세요.</p>
+          </section>
+        </section>
+      </div>
+    </div>
+    <footer class="recommendation-dialog-footer"><button class="button secondary" id="recommendation-done" type="button">리포트로 돌아가기</button></footer>
+  </dialog>
+  <dialog class="clinics-dialog" id="clinics-dialog" aria-labelledby="clinics-title" aria-describedby="clinics-description">
+    <header class="clinics-header"><span class="recommendation-dialog-mark" aria-hidden="true"><svg><use href="/static/icons.svg#map-pin"/></svg></span><div><h2 id="clinics-title" tabindex="-1">내 주변 피부과</h2><p id="clinics-description">피부과 전문의 신고기관을 가까운 순서로 확인해요.</p></div><button class="recommendation-dialog-close" id="clinics-close" type="button" aria-label="주변 병원 목록 닫기"><svg aria-hidden="true"><use href="/static/icons.svg#close"/></svg></button></header>
+    <div class="clinics-toolbar"><div class="clinics-filter"><span class="clinics-filter-label">검색 반경</span><div class="clinics-radius" role="group" aria-label="병원 검색 범위"><button type="button" data-clinic-radius="2000" aria-pressed="true">2km</button><button type="button" data-clinic-radius="5000" aria-pressed="false">5km</button><button type="button" data-clinic-radius="10000" aria-pressed="false">10km</button></div></div><button class="text-button clinics-retry" id="clinics-retry" type="button"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#refresh"/></svg>다시 찾기</button></div>
+    <p class="clinics-status" id="clinics-status" role="status" aria-live="polite"></p>
+    <div class="clinics-state" id="clinics-state"><span class="spinner" id="clinics-spinner" aria-hidden="true" hidden></span><span class="clinics-state-icon" id="clinics-state-icon" aria-hidden="true"><svg><use href="/static/icons.svg#map-pin"/></svg></span><h3 id="clinics-state-title">현재 위치를 확인해 주세요</h3><p id="clinics-state-detail">위치를 확인하면 주변 병원 목록이 나타나요.</p></div>
+    <div class="clinics-results" id="clinics-results" hidden>
+      <section class="clinics-list-panel" aria-labelledby="clinics-list-title"><div class="clinics-list-heading"><h3 id="clinics-list-title">병원 목록</h3><span>가까운 순 · 직선 거리</span></div><div class="clinics-list" id="clinics-list" role="list" aria-label="주변 병원 목록" tabindex="0"></div></section>
+      <article class="clinic-detail" id="clinic-detail" aria-labelledby="clinic-detail-name">
+        <div class="clinic-detail-content" id="clinic-detail-content" tabindex="0" aria-label="선택한 병원 상세 정보">
+        <div class="clinic-detail-heading"><span class="clinic-detail-symbol" aria-hidden="true"><svg><use href="/static/icons.svg#map-pin"/></svg></span><span>선택한 병원</span></div>
+        <div class="clinic-detail-badges"><span id="clinic-detail-department"></span><span id="clinic-detail-distance"></span></div><h3 id="clinic-detail-name"></h3>
+        <dl><div><dt>주소</dt><dd id="clinic-detail-address"></dd></div><div><dt>전화</dt><dd id="clinic-detail-phone"></dd></div><div><dt>등록된 운영 시간</dt><dd id="clinic-detail-hours"></dd></div></dl>
+        <a class="clinic-source-link" id="clinic-source" target="_blank" rel="noopener noreferrer">등록 정보 확인<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a>
+        <p class="recommendation-privacy">분기별 신고 현황이며 현재 진료 상황과 다를 수 있어요. 전문의의 현재 근무·탈모 진료 여부는 병원에 확인해 주세요.</p>
+        </div>
+        <div class="clinic-detail-footer"><div class="clinic-detail-actions"><button class="button secondary" id="clinic-copy-address" type="button">주소 복사</button><a class="button primary" id="clinic-call" hidden>전화하기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a></div><p class="clinic-detail-feedback" id="clinic-detail-feedback" role="status" aria-live="polite"></p></div>
+      </article>
+    </div>
+    <footer class="clinics-footer"><button class="button secondary" id="clinics-done" type="button">안내로 돌아가기</button></footer>
+  </dialog>
+  <dialog id="history-dialog" class="app-dialog history-dialog" aria-labelledby="history-title" aria-describedby="history-description">
+    <div class="history-header">
+      <span class="history-header-icon" aria-hidden="true"><svg><use href="/static/icons.svg#report"/></svg></span>
+      <div class="history-heading"><span class="history-eyebrow">MY RECORDS</span><h2 id="history-title">내 분석 기록</h2></div>
+      <button id="history-close" class="history-close" type="button" aria-label="내 분석 기록 닫기"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#close"/></svg></button>
+      <p id="history-description">차곡차곡 쌓인 관찰을 다시 살펴보세요.</p>
+    </div>
+    <div class="history-toolbar"><span>저장한 리포트 <strong id="history-count">—</strong></span><span class="history-sort"><svg aria-hidden="true"><use href="/static/icons.svg#clock"/></svg>최신순 · 최근 50개</span></div>
+    <div class="history-body">
+      <p id="history-message" class="history-message" role="status" aria-live="polite" hidden></p>
+      <div id="history-loading" class="history-loading" role="status" hidden><span class="visually-hidden">기록을 불러오고 있어요.</span><div class="history-skeleton" aria-hidden="true"><span></span><i></i><i></i></div><div class="history-skeleton" aria-hidden="true"><span></span><i></i><i></i></div><div class="history-skeleton" aria-hidden="true"><span></span><i></i><i></i></div></div>
+      <div id="history-empty" class="history-empty" hidden><span class="history-empty-icon" aria-hidden="true"><svg><use href="/static/icons.svg#report"/></svg></span><h3>아직 저장된 기록이 없어요</h3><p>사진 분석 전에 ‘내 계정에 저장’을 선택하면<br>나의 관찰 리포트를 여기에서 모아 볼 수 있어요.</p><button id="history-start" class="button primary" type="button">첫 관찰 기록 만들기<svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></button></div>
+      <div id="history-list" class="history-list" role="list" aria-label="저장한 관찰 리포트"></div>
+    </div>
+    <div class="history-footer"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#shield"/></svg><p>내 계정에만 보이는 기록이에요. 함께 저장한 사진은 리포트에서 확인할 수 있어요.</p></div>
+  </dialog>
+  <dialog id="camera-dialog" class="app-dialog camera-dialog" aria-labelledby="camera-title"><div class="dialog-heading"><h2 id="camera-title">카메라로 촬영하기</h2><button id="camera-close" class="dialog-close" type="button">닫기</button></div><p class="dialog-description">밝은 곳에서 머리 전체가 보이도록 맞춰 주세요. 촬영 전 화면은 서버로 보내지 않아요.</p><div class="camera-view"><video id="camera-video" autoplay playsinline muted aria-label="카메라 미리보기"></video><span class="camera-guide" aria-hidden="true"></span></div><p id="camera-message" role="status" aria-live="polite"></p><div class="camera-actions"><button id="camera-switch" class="button secondary" type="button">전·후면 전환</button><button id="camera-capture" class="button primary" type="button" disabled>촬영하고 불러오기</button></div><p class="camera-footnote">전면 미리보기는 좌우 반전돼요. 분석에는 반전되지 않은 촬영 원본을 사용해요.</p></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

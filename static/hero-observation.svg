@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <g id="corners" stroke="#a6c5ff" stroke-width="1.5"><path d="M92 48V32h16m144 16V32h-16M92 152v16h16m144-16v16h-16"/></g>
+    <g id="front">
+      <path d="M142 159v17l-33 19h142l-33-19v-17" fill="#edf4ff" stroke="#8babdc" stroke-width="1.5"/>
+      <path d="M125 94v22c0 39 26 58 55 58s55-19 55-58V94" fill="#fff" stroke="#8babdc" stroke-width="1.5"/>
+      <path d="M126 116c-15 1-15-23-3-20m111 20c15 1 15-23 3-20" fill="#edf4ff" stroke="#8babdc" stroke-width="1.5"/>
+      <path d="M123 103V77c0-37 20-57 57-57s57 20 57 57v26l-13-20c-13 2-17-20-27-16-8 3-9 9-17 9s-9-6-17-9c-10-4-14 18-27 16Z" fill="#dae7fc" stroke="#8babdc" stroke-width="1.5"/>
+      <g stroke="#8babdc" stroke-width="1.5"><path d="M145 111q9-5 18 0m34 0q9-5 18 0M153 119h2m50 0h2m-28-2-3 16h7m-17 13q14 8 28 0M151 40q-18 12-17 32m72-32q18 12 17 32M171 33q-16 9-16 23m34-23q16 9 16 23"/></g>
+    </g>
+  </defs>
+  <symbol id="hairline" viewBox="0 0 360 200">
+    <circle cx="180" cy="100" r="83" fill="#edf4ff"/>
+    <use href="#corners"/><use href="#front"/>
+    <path d="M135 83c13 2 18-20 28-16 8 3 9 9 17 9s9-6 17-9c10-4 14 18 27 16" fill="none" stroke="#0066ff" stroke-width="2" stroke-dasharray="3 4"/>
+    <g fill="#0066ff" stroke="#fff" stroke-width="2"><circle cx="135" cy="83" r="4"/><circle cx="180" cy="76" r="4"/><circle cx="224" cy="83" r="4"/></g>
+    <path d="M227 83h27l16-18h32" fill="none" stroke="#0066ff" stroke-width="1"/>
+    <circle cx="302" cy="65" r="2.5" fill="#0066ff"/>
+  </symbol>
+  <symbol id="crown" viewBox="0 0 360 200">
+    <circle cx="180" cy="100" r="83" fill="#edf4ff"/>
+    <use href="#corners"/>
+    <ellipse cx="180" cy="101" rx="60" ry="80" fill="#dae7fc" stroke="#8babdc" stroke-width="1.5"/>
+    <path d="M175 31c-7 22-4 35 6 53 10 17 5 38-7 57" fill="none" stroke="#fff" stroke-width="8"/>
+    <g fill="none" stroke="#8babdc" stroke-width="1.5"><path d="M164 36c-20 12-28 27-28 44m29-27c-18 13-23 26-22 44m22-26c-11 13-12 28-9 43m12-18c-5 18-5 33 3 46m22-105c21 14 30 28 31 45m-33-27c19 15 26 32 27 48m-24-26c13 16 16 30 11 45m-10-20c6 19 3 36-7 47m-43-27q-4 26 19 43m40-34q-1 26-24 39"/></g>
+    <circle cx="180" cy="96" r="32" fill="#0066ff" fill-opacity=".05" stroke="#0066ff" stroke-width="1.5" stroke-dasharray="3 4"/>
+    <path d="m204 74 35-18h53" fill="none" stroke="#0066ff" stroke-width="1"/>
+    <circle cx="292" cy="56" r="2.5" fill="#0066ff"/>
+  </symbol>
+  <symbol id="density" viewBox="0 0 360 200">
+    <circle cx="180" cy="100" r="83" fill="#edf4ff"/>
+    <use href="#corners"/>
+    <path d="M108 155q72-17 144 0v25H108Z" fill="#dae7fc"/>
+    <path d="M108 155q72-17 144 0" fill="none" stroke="#8babdc" stroke-width="1.5"/>
+    <g fill="none" stroke="#8babdc" stroke-width="2"><path d="M120 153c-6-32-9-60 3-89m14 86c-8-46-11-73 4-103m12 101c-8-49-9-84 7-112m11 111c-2-39-6-67 8-93m9 93c1-42-2-72 13-106m5 107c-1-39 1-62 15-91m4 94c-2-29 1-48 12-68m3 71c0-21 3-33 9-46"/></g>
+    <rect x="150" y="67" width="62" height="65" rx="10" fill="#0066ff" fill-opacity=".06" stroke="#0066ff" stroke-width="1.5" stroke-dasharray="3 4"/>
+    <path d="M168 101h26m-22-4-4 4 4 4m18-8 4 4-4 4m18-37 29-15h55" fill="none" stroke="#0066ff" stroke-width="1.5"/>
+    <circle cx="292" cy="53" r="2.5" fill="#0066ff"/>
+  </symbol>
+</svg>

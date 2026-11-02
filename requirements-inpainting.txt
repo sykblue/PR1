@@ -1,0 +1,5 @@
+# Optional. Install a CUDA-enabled PyTorch build suitable for your GPU first.
+diffusers>=0.35,<1
+transformers>=4.44,<6
+accelerate>=1.0,<2
+safetensors>=0.4,<1

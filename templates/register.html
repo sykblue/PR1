@@ -1,0 +1,16 @@
+{% extends "account-base.html" %}
+{% block title %}회원가입{% endblock %}
+{% block heading %}회원가입{% endblock %}
+{% block description %}나만의 계정으로 헤어라인 관찰 기록을<br>시작해 보세요.{% endblock %}
+{% block form %}
+<form id="account-form" class="auth-form" data-mode="register" data-next="{{ return_to }}" action="/api/auth/register" method="post">
+  <div class="auth-fields-scroll" tabindex="0" role="region" aria-label="계정 입력 항목">
+  <div class="auth-field"><label for="account-username">아이디</label><input id="account-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" minlength="3" maxlength="24" placeholder="아이디를 만들어 주세요" aria-describedby="username-hint" required><small id="username-hint">한글·영문·숫자·밑줄 3~24자</small></div>
+  <div class="auth-field"><label for="account-password">비밀번호</label><input id="account-password" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="8자 이상의 비밀번호" aria-describedby="password-hint" required><small id="password-hint">8~128자로 입력해 주세요.</small></div>
+  <div class="auth-field"><label for="account-confirm">비밀번호 확인</label><input id="account-confirm" type="password" autocomplete="new-password" minlength="8" maxlength="128" placeholder="비밀번호를 한 번 더 입력해 주세요" required></div>
+  </div>
+  <p id="account-message" class="auth-message" role="status" aria-live="polite" hidden></p>
+  <button id="account-submit" class="button primary" type="submit" disabled>가입하고 시작하기</button>
+</form>
+{% endblock %}
+{% block switch %}이미 계정이 있으신가요? <a href="{{ switch_url }}">로그인</a>{% endblock %}

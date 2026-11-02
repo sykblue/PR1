@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Hairline Lab의 사진 촬영, 분석, 가상 편집, 저장 방식과 자주 묻는 질문을 한곳에서 확인하세요.">
+  <meta name="theme-color" content="#ffffff">
+  <title>이용 안내 · Hairline Lab</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/page-experience.css">
+  <script src="/static/page-experience.js"></script>
+  <link rel="stylesheet" href="/static/account-camera.css">
+  <link rel="stylesheet" href="/static/guide-page.css">
+  <script src="/static/auth.js" defer></script>
+  <script src="/static/realtime.js" defer></script>
+  <script src="/static/guide.js" defer></script>
+</head>
+<body class="usage-guide-page viewport-page">
+  <div class="visually-hidden" data-page-announcement role="status" aria-live="polite"></div>
+  <a class="skip-link" href="#guide-main">이용 안내 본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="/" aria-label="Hairline Lab 홈으로">hairline<span class="wordmark-light">lab</span></a>
+      <nav aria-label="주요 메뉴"><a href="/analysis" class="nav-link">사진 분석</a><a href="/simulation" class="nav-link">변화 미리보기</a><a href="/training" class="nav-link">로컬 학습</a><a href="/guide" class="nav-link active" aria-current="page">이용 안내</a></nav>
+      <div class="account-actions"><a id="account-name" class="account-profile" href="/profile" aria-label="내 정보" hidden></a><a id="account-login" href="/login?next=%2Fguide" class="text-button">로그인</a><a id="account-register" href="/register?next=%2Fguide" class="text-button account-register">회원가입</a><button id="account-logout" type="button" class="text-button" hidden>로그아웃</button></div>
+    </div>
+  </header>
+
+
+  <div class="app-layout" id="app-layout">
+  <main class="container" id="guide-main" data-page-content data-page-kind="guide">
+    <div class="page-skeleton" data-page-skeleton aria-hidden="true"><div class="page-sk-grid"><div class="page-sk-card"><i class="sk-shape sk-caption"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><div class="page-sk-section"><i class="sk-shape sk-title"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div></div><div class="page-sk-section"><i class="sk-shape sk-title"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div></div><i class="sk-shape sk-field"></i></div></div></div>
+    <p id="account-message" class="account-notice" role="status" aria-live="polite" hidden></p>
+    <h1 class="visually-hidden" id="guide-title">이용 안내</h1>
+    <div class="user-guide-layout">
+      <aside class="help-contents"><span>이 페이지에서</span><nav aria-label="이용 안내 목차"><a href="#getting-started" data-guide-link="getting-started">01 사용 순서</a><a href="#photo-guide" data-guide-link="photo-guide">02 촬영 요령</a><a href="#data-guide" data-guide-link="data-guide">03 처리·저장 안내</a><a href="#faq" data-guide-link="faq">04 자주 묻는 질문</a></nav><a class="help-training-link" href="/training-guide">로컬 학습이 궁금하다면<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a></aside>
+      <div class="help-content" id="help-reading" tabindex="0" role="region" aria-label="이용 안내 내용">
+        <section class="help-section" id="getting-started" data-guide-section aria-labelledby="getting-started-title">
+          <div class="help-section-heading"><span>01 / START</span><h2 id="getting-started-title">필요한 기능부터 시작하세요</h2><p>관찰과 편집, 학습은 각각의 공간에서 사용할 수 있어요.</p></div>
+          <div class="help-start-grid">
+            <article class="help-start-card"><span class="help-feature-icon"><svg aria-hidden="true"><use href="/static/icons.svg#scan"/></svg></span><h3>현재 모습 관찰하기</h3><p>사진에 보이는 특징을 리포트로 정리해요.</p><ol><li>사진 선택 또는 카메라 촬영</li><li>관찰 부위와 전송·저장 선택</li><li>분석 실행 후 리포트 확인</li></ol><a href="/analysis">사진 분석 시작<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></article>
+            <article class="help-start-card"><span class="help-feature-icon"><svg aria-hidden="true"><use href="/static/icons.svg#wand"/></svg></span><h3>가상의 모습 비교하기</h3><p>외형을 바꿔 보고 원본과 비교해요.</p><ol><li>편집할 사진 준비</li><li>부위·강도·편집 방식 선택</li><li>슬라이더·나란히 비교 후 저장</li></ol><a href="/simulation">변화 미리보기 열기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></article>
+            <article class="help-start-card"><span class="help-feature-icon"><svg aria-hidden="true"><use href="/static/icons.svg#layers"/></svg></span><h3>내 사진으로 학습하기</h3><p>직접 정한 라벨로 로컬 분류기를 만들어요.</p><ol><li>로그인 후 학습 사진 등록</li><li>라벨·사람 그룹 확인</li><li>준비 조건 충족 후 학습 실행</li></ol><a href="/training-guide">학습 방법 확인<svg aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></article>
+          </div>
+          <p class="help-scope-note"><svg aria-hidden="true"><use href="/static/icons.svg#info"/></svg>사진 기반의 참고 도구예요. 의료 진단이나 실제 변화 예측을 제공하지 않아요.</p>
+        </section>
+        <section class="help-section" id="photo-guide" data-guide-section aria-labelledby="photo-guide-title">
+          <div class="help-section-heading"><span>02 / PHOTO</span><h2 id="photo-guide-title">사진 한 장, 이렇게 준비해요</h2><p>조명·각도·가르마를 비슷하게 맞추면 비교하기 편해요.</p></div>
+          <div class="help-photo-card">
+            <div class="help-photo-rules"><div><svg aria-hidden="true"><use href="/static/icons.svg#sun"/></svg><span><strong>밝고 고른 조명</strong><p>짙은 그림자와 강한 빛, 필터를 피해 주세요.</p></span></div><div><svg aria-hidden="true"><use href="/static/icons.svg#frame"/></svg><span><strong>머리 전체가 보이게</strong><p>한 사람의 머리가 잘리지 않게 촬영해 주세요.</p></span></div><div><svg aria-hidden="true"><use href="/static/icons.svg#hairline"/></svg><span><strong>궁금한 부위가 보이게</strong><p>헤어라인은 정면, 정수리·가르마는 위쪽에서 살펴봐요.</p></span></div></div>
+            <div class="help-file-rules"><span>지원하는 사진</span><strong>JPG · PNG · WEBP</strong><ul><li>파일 크기 10MB 이하</li><li>가로·세로 각각 160px 이상</li><li>전체 20MP 이하의 정지 사진</li></ul><a href="/analysis">사진 선택하러 가기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a></div>
+          </div>
+        </section>
+        <section class="help-section" id="data-guide" data-guide-section aria-labelledby="data-guide-title">
+          <div class="help-section-heading"><span>03 / YOUR DATA</span><h2 id="data-guide-title">내 사진은 어떻게 쓰이나요?</h2><p>실행하거나 저장할 항목을 직접 선택할 수 있어요.</p></div>
+          <div class="help-data-table" tabindex="0" role="region" aria-label="기능별 사진 처리와 저장 안내"><table><thead><tr><th scope="col">사용 기능</th><th scope="col">처리하는 곳</th><th scope="col">저장·전송 방식</th></tr></thead><tbody><tr><th scope="row">AI 사진 분석</th><td>Google Gemini · 한도 시 로컬 Ollama</td><td>전송 동의 후 Gemini를 먼저 사용해요. 한도에 도달하면 준비된 로컬 비전 모델로 이어서 관찰해요. 리포트는 로그인 후 저장을 선택할 때만 보관해요. 사진도 함께 저장하도록 선택하면 촬영 메타데이터를 제거한 사진을 내 계정에 보관해요.</td></tr><tr><th scope="row">가상 이미지 편집</th><td>로컬 또는 Google</td><td>기본 합성과 로컬 AI는 이 컴퓨터에서 처리해요. Google 편집은 전송·비용 확인이 필요하며, 편집 결과는 직접 내려받아요.</td></tr><tr><th scope="row">로컬 학습</th><td>이 컴퓨터</td><td>학습용 저장을 선택한 사진·라벨·특징값을 계정별로 보관해요. 등록 사진은 로컬 학습 페이지에서 관리해요.</td></tr><tr><th scope="row">분석 사진 이어 쓰기</th><td>이 브라우저</td><td>‘변화 비교’를 누를 때 원본 한 장을 임시 보관하고 가져온 뒤 지워요. 전달은 5분 안에 가능하며, 만료된 사진은 다음 접근 때 정리해요.</td></tr></tbody></table></div>
+          <div class="help-data-footer"><p><svg aria-hidden="true"><use href="/static/icons.svg#shield"/></svg>서버에서 처리하는 사진은 원본의 촬영 메타데이터를 제거해요. Google 전송에는 별도의 이용 조건이 적용돼요.</p><a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noreferrer">Google 데이터 이용 안내<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a></div>
+        </section>
+        <section class="help-section help-faq-section" id="faq" data-guide-section aria-labelledby="faq-title">
+          <div class="help-section-heading"><span>04 / FAQ</span><h2 id="faq-title">궁금한 내용을 찾아보세요</h2><p>질문과 답변을 검색하거나 주제별로 살펴볼 수 있어요.</p></div>
+          <div class="help-faq-tools" id="faq-tools" hidden><div class="help-search"><svg aria-hidden="true"><use href="/static/icons.svg#scan"/></svg><label class="visually-hidden" for="faq-search">질문과 답변 검색</label><input id="faq-search" type="search" maxlength="100" autocomplete="off" placeholder="예: 사진 저장, 카메라, 편집 강도" aria-controls="faq-list"><button type="button" id="faq-clear" aria-label="검색어 지우기" hidden><svg aria-hidden="true"><use href="/static/icons.svg#close"/></svg></button></div><div class="help-faq-categories" role="group" aria-label="도움말 주제"><button type="button" data-faq-filter="all" aria-pressed="true">전체</button><button type="button" data-faq-filter="photo" aria-pressed="false">사진 준비</button><button type="button" data-faq-filter="analysis" aria-pressed="false">사진 분석</button><button type="button" data-faq-filter="editing" aria-pressed="false">가상 편집</button><button type="button" data-faq-filter="privacy" aria-pressed="false">저장·계정</button><button type="button" data-faq-filter="help" aria-pressed="false">문제 해결</button></div></div>
+          <div class="help-faq-toolbar"><span id="faq-count" role="status" aria-live="polite">10개의 도움말</span><div id="faq-expand-tools" hidden><button type="button" id="faq-expand" aria-controls="faq-list">모두 펼치기</button><button type="button" id="faq-collapse" aria-controls="faq-list">접기</button></div></div>
+          <div class="help-faq-list" id="faq-list">
+          <details class="help-faq-item" id="faq-file" data-faq-category="photo" open><summary><span>어떤 사진 파일을 사용할 수 있나요?</span><svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><div class="help-faq-answer"><p>JPG·PNG·WEBP 한 장을 선택해 주세요. 10MB 이하, 가로·세로 각각 160px 이상, 전체 20MP 이하를 지원해요. 움직이는 이미지나 손상된 파일은 사용할 수 없어요.</p></div></details>
+          <details class="help-faq-item" id="faq-camera" data-faq-category="photo"><summary><span>카메라가 열리지 않으면 어떻게 하나요?</span><svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><div class="help-faq-answer"><p>브라우저의 카메라 권한과 연결된 장치를 확인해 주세요. 다른 앱이 카메라를 사용하고 있다면 종료한 뒤 다시 시도해 보세요. 촬영이 어려우면 이미 저장된 사진을 선택해도 돼요.</p></div></details>
+          <details class="help-faq-item" id="faq-observation" data-faq-category="analysis"><summary><span>사진 분석으로 무엇을 알 수 있나요?</span><svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><div class="help-faq-answer"><p>사진에 보이는 헤어라인·두피 노출·모발 분포의 특징을 정리해요. 조명과 각도에 영향을 받으며, 의료 진단·탈모 단계·질환 확률을 제공하지 않아요. 실제 상태 판단이 필요하면 전문적인 상담으로 확인해 주세요.</p></div></details>
+          <details class="help-faq-item" id="faq-local" data-faq-category="analysis"><summary><span>사진 분석과 로컬 학습은 어떻게 다른가요?</span><svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><div class="help-faq-answer"><p>AI 사진 분석은 동의한 사진을 Google로 보내 보이는 특징을 정리해요. 호출 한도에 도달하면 준비된 Ollama 비전 모델로 이 컴퓨터에서 이어서 관찰해요. 로컬 학습은 내가 직접 라벨을 붙인 사진으로 이 컴퓨터의 분류기를 만드는 기능이에요. Gemini를 재학습하는 기능은 아니며, 필요한 사진 구성은 <a href="/training-guide">학습 가이드</a>에서 확인할 수 있어요.</p></div></details>
+          <details class="help-faq-item" id="faq-strength" data-faq-category="editing"><summary><span>편집 강도 50은 탈모가 50%라는 뜻인가요?</span><svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><div class="help-faq-answer"><p>편집 강도는 이미지를 바꾸는 정도예요. 탈모 비율·진행 단계·미래 예측과는 관계가 없어요. 낮은 강도부터 조금씩 바꾸고 원본과 함께 비교해 보세요.</p></div></details>
+          <details class="help-faq-item" id="faq-paid" data-faq-category="editing"><summary><span>편집 방식이 비활성화되어 있거나 비용 안내가 보여요.</span><svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><div class="help-faq-answer"><p>사용 가능한 편집 방식은 현재 서버 준비 상태에 따라 달라요. 기본 로컬 합성과 로컬 AI는 이 컴퓨터에서 처리하고, Google 이미지 편집은 별도 유료 설정이 필요해요. Google 편집은 사진 전송과 비용 확인을 모두 선택한 뒤에만 실행해요.</p></div></details>
+          <details class="help-faq-item" id="faq-history" data-faq-category="privacy"><summary><span>분석 사진과 결과는 자동 저장되나요?</span><svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><div class="help-faq-answer"><p>분석 리포트는 로그인 후 리포트 저장을 선택할 때만 보관해요. ‘이 사진도 내 계정에 함께 저장해요’를 선택하면 사진도 함께 다시 볼 수 있어요. 사진은 별도의 학습용 저장을 선택했을 때 계정별로 보관해요. 가상 편집 결과는 계정 기록에 자동 저장하지 않으므로 ‘이미지 저장’을 눌러 내려받아 주세요.</p></div></details>
+          <details class="help-faq-item" id="faq-transfer" data-faq-category="privacy"><summary><span>분석 사진을 변화 미리보기로 가져갈 수 있나요?</span><svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><div class="help-faq-answer"><p>분석 화면에서 사진을 선택한 뒤 사진 도구 모음의 ‘변화 비교’를 누르세요. 전달용 원본 한 장을 이 브라우저에 잠시 보관하고, 가져온 뒤 지워요. 전달은 5분 안에만 가능하고 계정이 달라지면 가져올 수 없어요. 만료된 사진은 다음 접근 때 정리해요. 일반 메뉴 이동으로는 사진이 따라가지 않아요.</p></div></details>
+          <details class="help-faq-item" id="faq-request" data-faq-category="help"><summary><span>분석 요청에 실패하면 사진을 다시 올려야 하나요?</span><svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><div class="help-faq-answer"><p>현재 페이지에 사진이 남아 있다면 안내를 확인한 뒤 다시 실행할 수 있어요. 서버 연결·API 사용 가능 여부·호출 제한에 따라 실패할 수 있어요. 계정을 바꾸거나 페이지를 새로고침하면 사진은 다시 선택해야 해요. ‘분석 후 학습용 저장’을 선택했다면 분석 실패와 별도로 저장됐을 수 있으니 저장 안내를 먼저 확인해 주세요.</p></div></details>
+          <details class="help-faq-item" id="faq-edit-result" data-faq-category="help"><summary><span>가상 편집이 실패하거나 결과가 어색해요.</span><svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><div class="help-faq-answer"><p>사진에서 모발 영역을 찾기 어렵거나 편집 부위가 보이지 않으면 실패할 수 있어요. 밝고 머리 전체가 보이는 사진으로 바꾸거나 부위·강도를 조정해 보세요. 간단 합성은 경계나 피부색이 부자연스러울 수 있고, AI 편집은 다른 부분도 바꿀 수 있어요. 대기 취소는 브라우저의 대기만 끝내므로 이미 시작한 서버 처리나 유료 비용까지 취소되는 것은 아니에요.</p></div></details>
+          </div>
+          <div class="help-faq-empty" id="faq-empty" hidden><svg aria-hidden="true"><use href="/static/icons.svg#chat"/></svg><h3>일치하는 도움말이 없어요</h3><p>검색어를 줄이거나 다른 주제를 선택해 보세요.</p><button type="button" class="button secondary" id="faq-reset">전체 도움말 보기</button></div>
+        </section>
+        <section class="help-bottom-card" aria-label="이용 시작"><div><span>READY WHEN YOU ARE</span><h2>이제 내 사진으로 시작해 볼까요?</h2><p>필요한 기능을 선택하고, 나의 모습을 살펴보세요.</p></div><a class="button primary" href="/analysis">사진 분석 시작<svg class="icon" aria-hidden="true"><use href="/static/icons.svg#arrow-right"/></svg></a></section>
+      </div>
+    </div>
+  </main>
+  </div>
+  
+  <footer><div class="container footer-inner"><a href="/" class="footer-brand">hairline lab</a><span>오늘의 모습을 이해하는 작은 실험</span><span>사진 기반 참고 도구 · 의료 진단 목적 아님</span></div></footer>
+
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
+

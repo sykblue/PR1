@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+<symbol id="follicle" viewBox="0 0 24 24"><path d="M6 17V9a6 6 0 0 1 12 0v8M10 19V9a2 2 0 0 1 4 0v10M3 20h18"/></symbol>
+<symbol id="sparkles" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5ZM20 2v4m-2-2h4"/></symbol>
+<symbol id="portrait" viewBox="0 0 96 96"><rect x="8" y="8" width="80" height="80" rx="20" stroke="#d5e3fc" fill="#fff"/><path d="M28 57V37c0-27 40-27 40 0v20M34 40c9-1 9-8 14-8s5 7 14 8M34 41v13c0 19 28 19 28 0V41M32 74c5-10 27-10 32 0M41 49h1m12 0h1m-11 9q4 3 8 0" stroke="#8babdc" stroke-width="2"/><path d="M15 30V16h14m38 0h14v14M15 65v15h14m38 0h14V65" stroke="#0066ff" stroke-width="2"/></symbol>
+<symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+<symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="trash" viewBox="0 0 24 24"><path d="M4 6h16M9 6V4h6v2M6 6l1 14h10l1-14M10 10v6m4-6v6"/></symbol>
+<symbol id="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+<symbol id="frame" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><circle cx="12" cy="11" r="3"/><path d="M7 18c1-4 9-4 10 0"/></symbol>
+<symbol id="person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2c0-7 16-7 16 0v2"/></symbol>
+<symbol id="scan" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M2 12h20M8 8a4 4 0 0 1 8 0m-8 8a4 4 0 0 0 8 0"/></symbol>
+<symbol id="arrow-right" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+<symbol id="arrow-up-right" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12"/></symbol>
+<symbol id="layers" viewBox="0 0 24 24"><path d="m12 3 10 5-10 5L2 8Zm-9 9 9 5 9-5m-18 5 9 5 9-5"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="m12 2 8 3v7c0 5-8 10-8 10S4 17 4 12V5Z"/><path d="m8 12 3 3 5-6"/></symbol>
+<symbol id="report" viewBox="0 0 48 48"><rect x="10" y="5" width="28" height="38" rx="6"/><path d="M18 15h12M18 22h12M18 29h5m6 5 3 3 7-8"/></symbol>
+<symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10h.01"/></symbol>
+<symbol id="download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+<symbol id="wand" viewBox="0 0 24 24"><path d="m4 20 12-12 4 4L8 24M12 12l4 4M5 3v4M3 5h4m12-4v4m-2-2h4M21 18v4m-2-2h4" transform="translate(0 -2)"/></symbol>
+<symbol id="compare" viewBox="0 0 48 48"><rect x="6" y="9" width="36" height="30" rx="5"/><path d="M24 4v40M12 29l5-7 7 9m0-5 6-8 7 10"/><circle cx="15" cy="17" r="2"/></symbol>
+<symbol id="chevrons" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4m8-8 4 4-4 4"/></symbol>
+<symbol id="chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="hairline" viewBox="0 0 24 24"><path d="M5 20V9c0-10 14-10 14 0v11M5 10c4 0 3-5 6-5 2 0 1 4 3 4s2-3 5 1"/></symbol>
+<symbol id="crown" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="8" ry="10"/><ellipse cx="12" cy="9" rx="3" ry="4" stroke-dasharray="2 3"/></symbol>
+<symbol id="density" viewBox="0 0 24 24"><path d="M5 20V9c0-4 2-6 3-7M10 20V8c0-3 1-5 2-6m3 18V9c0-4 1-6 2-7m3 18V10"/></symbol>
+<symbol id="chat" viewBox="0 0 24 24"><path d="M20 11.5a8 8 0 0 1-8 8H8l-5 2v-6a8 8 0 0 1 9-12 8 8 0 0 1 8 8Z"/><path d="M8 10h8m-8 4h5"/></symbol>
+<symbol id="refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M6 7a7 7 0 0 1 12-1l2 6M4 12l2 6a7 7 0 0 0 12-1"/></symbol>
+<symbol id="minimize" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+<symbol id="map-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="capsule" viewBox="0 0 24 24"><g transform="rotate(-45 12 12)"><rect x="3" y="7" width="18" height="10" rx="5"/><path d="M12 7v10"/></g></symbol>
+<symbol id="locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></symbol>
+</svg>

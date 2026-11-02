@@ -1,0 +1,58 @@
+.vision-workspace { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.vision-card { display: flex; flex-direction: column; min-width: 0; min-height: 0; padding: 0; overflow: hidden; }
+.vision-card-heading { display: flex; align-items: center; gap: 8px; flex-shrink: 0; min-height: 64px; padding: 16px 20px; border-bottom: 1px solid var(--border-card); }
+.vision-card-heading h2 { flex: 1; color: var(--fg-strong); font-size: 15px; font-weight: 600; line-height: 22px; }
+.vision-card-heading > span:last-child { color: var(--fg-secondary); font-size: 11px; }
+.vision-step { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-brand-faint); color: var(--fg-brand-strong); font-size: 11px; }
+.vision-card-scroll { min-height: 0; padding: 20px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.vision-card .field-label { margin-top: 16px; font-size: 12px; }
+.vision-card .field-label small { margin-left: 4px; color: var(--fg-secondary); font-weight: 400; }
+.vision-card input[type="text"], .vision-card select, .vision-card textarea { width: 100%; min-height: 44px; font: inherit; font-size: 12px; }
+.vision-card textarea { padding: 12px; border: 1px solid var(--border-control); border-radius: var(--radius-choice); resize: vertical; background: var(--bg-subtle); line-height: 20px; }
+.vision-hint { margin-top: 8px; color: var(--fg-secondary); font-size: 11px; line-height: 19px; }
+.vision-photo { display: grid; place-items: center; min-height: 168px; padding: 12px; overflow: hidden; border: 1px dashed var(--border-control); border-radius: var(--radius-choice); background: var(--bg-subtle); cursor: pointer; }
+.vision-photo > span { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--fg-secondary); font-size: 12px; }
+.vision-photo svg { width: 28px; height: 28px; color: var(--brand-primary); }
+.vision-photo img { display: block; max-height: 200px; max-width: 100%; object-fit: contain; border-radius: 8px; }
+#vision-photo { width: 100%; margin-top: 8px; font-size: 11px; }
+.vision-card .consent-row { margin-top: 16px; }
+.vision-card .consent-row label, .vision-card .consent-row label > span { font-size: 11px; line-height: 19px; }
+.vision-card-actions { display: flex; flex-shrink: 0; gap: 8px; align-items: center; margin-top: auto; padding: 14px 20px; border-top: 1px solid var(--border-card); }
+.vision-card-actions .button { flex: 1; min-height: 44px; padding-inline: 12px; font-size: 12px; }
+.vision-target-note { min-height: 73px; color: var(--fg-secondary); font-size: 11px; line-height: 19px; }
+.vision-list-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 24px; }
+.vision-list-heading h3 { color: var(--fg-strong); font-size: 13px; font-weight: 600; }
+.vision-samples { display: grid; gap: 6px; margin-top: 8px; }
+.vision-sample { display: flex; align-items: center; gap: 4px; padding: 4px; border: 1px solid var(--border-card); border-radius: var(--radius-choice); }
+.vision-sample > button:first-child { flex: 1; min-width: 0; min-height: 44px; padding: 4px 8px; border: 0; border-radius: 8px; background: transparent; text-align: left; }
+.vision-sample > button[aria-pressed="true"] { color: var(--fg-brand-strong); background: var(--bg-brand-faint); }
+.vision-sample strong, .vision-sample small { display: block; font-size: 11px; line-height: 19px; }
+.vision-sample small { color: var(--fg-secondary); font-size: 10px; }
+.vision-sample .text-button { min-width: 44px; font-size: 10px; }
+.vision-counts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.vision-counts > div { padding: 12px 8px; border-radius: var(--radius-choice); background: var(--bg-subtle); }
+.vision-counts span { display: block; color: var(--fg-secondary); font-size: 11px; line-height: 18px; }
+.vision-counts strong { display: block; margin-top: 4px; color: var(--fg-strong); font-size: 24px; line-height: 30px; }
+.vision-readiness { margin-top: 16px; color: var(--fg-brand-strong); font-size: 12px; line-height: 21px; }
+.vision-progress { margin-top: 20px; padding: 16px; border: 1px solid var(--border-card); border-radius: var(--radius-choice); }
+.vision-progress > div { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; }
+.vision-progress progress { width: 100%; height: 8px; margin-block: 12px; accent-color: var(--brand-primary); }
+.vision-progress p { color: var(--fg-secondary); font-size: 11px; line-height: 19px; }
+.vision-jobs { display: grid; gap: 12px; margin-top: 8px; }
+.vision-job { padding: 14px; border: 1px solid var(--border-card); border-radius: var(--radius-choice); }
+.vision-job > strong { color: var(--fg-strong); font-size: 12px; line-height: 20px; }
+.vision-job > p { margin-top: 6px; color: var(--fg-secondary); font-size: 11px; line-height: 19px; }
+.vision-job-actions { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 8px; }
+.vision-job-actions .text-button { font-size: 11px; }
+.vision-test-dialog { width: min(680px, calc(100% - 32px)); max-height: calc(100dvh - 48px); }
+.vision-test-dialog > pre { max-height: 52dvh; margin-top: 16px; padding: 16px; overflow: auto; border-radius: var(--radius-choice); background: var(--bg-subtle); color: var(--fg-default); font-size: 12px; line-height: 21px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.vision-test-dialog > p[role="status"] { margin-top: 12px; font-size: 13px; line-height: 22px; }
+@media (min-width: 992px) and (min-height: 600px) {
+  .vision-training-page > main.container { gap: 12px; }
+  .vision-workspace { flex: 1; min-height: 0; grid-template-columns: minmax(280px, .95fr) minmax(300px, 1.1fr) minmax(300px, 1fr); }
+  #vision-message { flex-shrink: 0; margin: 0; max-height: 64px; overflow-y: auto; }
+}
+@media (max-width: 991px), (max-height: 599px) {
+  .vision-training-page > main { padding-block: 24px; }
+  .vision-card-scroll { max-height: none; }
+}

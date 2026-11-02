@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="사진 한 장으로 헤어라인과 모발의 가상 변화를 편집하고 원본과 비교해 보세요.">
+  <meta name="theme-color" content="#ffffff">
+  <title>변화 미리보기 · Hairline Lab</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <link rel="stylesheet" href="/static/page-experience.css">
+  <script src="/static/page-experience.js"></script>
+  <link rel="stylesheet" href="/static/simulation-page.css">
+  <link rel="stylesheet" href="/static/account-camera.css">
+  <script src="/static/auth.js" defer></script>
+  <script src="/static/realtime.js" defer></script>
+  <script src="/static/photo-handoff.js" defer></script>
+  <script src="/static/simulation.js" defer></script>
+  <script src="/static/camera.js" defer></script>
+</head>
+<body class="simulation-page viewport-page">
+  <div class="visually-hidden" data-page-announcement role="status" aria-live="polite"></div>
+  <a class="skip-link" href="#simulation-content">본문으로 건너뛰기</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="/" aria-label="Hairline Lab 홈으로">hairline<span class="wordmark-light">lab</span></a>
+      <nav aria-label="주요 메뉴"><a href="/analysis" class="nav-link">사진 분석</a><a href="/simulation" class="nav-link active" aria-current="page">변화 미리보기</a><a href="/training" class="nav-link">로컬 학습</a><a href="/guide" class="nav-link">이용 안내</a></nav>
+      <div class="account-actions"><a id="account-name" class="account-profile" href="/profile" aria-label="내 정보" hidden></a><a id="account-login" href="/login?next=%2Fsimulation" class="text-button">로그인</a><a id="account-register" href="/register?next=%2Fsimulation" class="text-button account-register">회원가입</a><button id="account-logout" type="button" class="text-button" hidden>로그아웃</button></div>
+    </div>
+  </header>
+
+  <div class="app-layout" id="app-layout">
+  <main class="container" id="simulation-content" data-page-content data-page-kind="simulation">
+    <div class="page-skeleton" data-page-skeleton aria-hidden="true"><div class="page-sk-toolbar"><i class="sk-shape sk-title"></i><i class="sk-shape sk-caption"></i></div><div class="page-sk-grid"><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-media"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><i class="sk-shape sk-action"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i><div class="page-sk-copy"><i class="sk-shape sk-line"></i><i class="sk-shape sk-line sk-medium"></i><i class="sk-shape sk-line sk-short"></i></div><i class="sk-shape sk-action"></i></div><div class="page-sk-card"><i class="sk-shape sk-title"></i><i class="sk-shape sk-media"></i><div class="page-sk-row"><i class="sk-shape sk-field"></i><i class="sk-shape sk-field"></i></div><i class="sk-shape sk-action"></i></div></div></div>
+    <p id="account-message" class="account-notice" role="status" aria-live="polite" hidden></p>
+    <h1 class="visually-hidden" id="simulation-title">변화 미리보기</h1>
+    <div class="preview-studio">
+      <section class="panel preview-photo-panel" aria-labelledby="preview-photo-title" tabindex="0">
+        <div class="panel-heading"><h2 id="preview-photo-title">사진 준비</h2><span class="small-label">JPG · PNG · WEBP</span></div>
+        <div class="preview-photo-section">
+          <input id="photo-input" type="file" accept="image/jpeg,image/png,image/webp" class="visually-hidden">
+          <input id="camera-file" type="file" accept="image/jpeg,image/png,image/webp" capture="user" hidden>
+          <button class="preview-dropzone" id="dropzone" type="button" aria-label="편집할 사진 선택, JPG PNG WEBP 10MB 이하"><span class="preview-upload-icon"><svg aria-hidden="true"><use href="/static/icons.svg#plus"/></svg></span><strong>내 사진을 선택해 주세요</strong><span>클릭하거나 사진을 여기에 놓기</span><small>최대 10MB · 160px 이상 · 20MP 이하</small></button>
+          <div class="preview-photo-selected" id="photo-selected" hidden><img id="photo-preview" alt="선택한 원본 사진"><div><strong id="photo-name"></strong><span id="photo-meta"></span><button class="text-button" id="change-photo" type="button">사진 변경</button></div><button class="preview-remove" id="photo-reset" type="button" aria-label="사진 제거"><svg aria-hidden="true"><use href="/static/icons.svg#close"/></svg></button></div>
+          <button type="button" class="preview-camera text-button" id="camera-open"><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#frame"/></svg>카메라로 촬영하기</button>
+        </div>
+        <details class="preview-tips"><summary>사진·비교 도움말<svg aria-hidden="true"><use href="/static/icons.svg#chevron-down"/></svg></summary><section class="preview-guide" aria-label="더 편하게 비교하는 방법"><div><svg aria-hidden="true"><use href="/static/icons.svg#sun"/></svg><strong>밝고 선명한 사진</strong><p>머리 전체가 보이는 사진이 좋아요.</p></div><div><svg aria-hidden="true"><use href="/static/icons.svg#wand"/></svg><strong>조금씩 바꿔 보기</strong><p>낮은 강도부터 천천히 비교해 보세요.</p></div><div><svg aria-hidden="true"><use href="/static/icons.svg#scan"/></svg><strong>현재 모습도 살펴보기</strong><p><a href="/analysis">사진 분석으로 관찰 리포트 확인하기<svg aria-hidden="true"><use href="/static/icons.svg#arrow-up-right"/></svg></a></p></div></section></details>
+      </section>
+      <section class="panel preview-settings" aria-labelledby="preview-settings-title">
+        <div class="panel-heading"><h2 id="preview-settings-title">나만의 편집 설정</h2><span class="small-label">한 단계씩 간편하게</span></div>
+        
+        <div class="preview-settings-scroll" id="preview-settings-scroll" tabindex="0" role="region" aria-label="가상 편집 설정">
+        <fieldset class="preview-scenarios"><legend><span>2</span>어디를 바꿔 볼까요?</legend>
+          <div class="preview-scenario-options">
+            <label><input type="radio" name="scenario" value="hairline" checked><span><svg aria-hidden="true"><use href="/static/icons.svg#hairline"/></svg><strong>헤어라인</strong></span></label>
+            <label><input type="radio" name="scenario" value="crown"><span><svg aria-hidden="true"><use href="/static/icons.svg#crown"/></svg><strong>정수리</strong></span></label>
+            <label><input type="radio" name="scenario" value="density"><span><svg aria-hidden="true"><use href="/static/icons.svg#density"/></svg><strong>모발 분포</strong></span></label>
+          </div><p id="scenario-description">앞쪽 모발 경계가 달라 보이는 모습을 편집해요.</p>
+        </fieldset>
+        <div class="preview-strength">
+          <label for="strength">편집 강도<output id="strength-value" for="strength">35</output></label>
+          <input type="range" id="strength" min="1" max="100" value="35" aria-describedby="strength-note">
+          <div class="range-labels"><span>미세하게</span><span>뚜렷하게</span></div>
+          <div class="strength-presets" role="group" aria-label="편집 강도 빠른 선택"><button type="button" data-strength="25" aria-pressed="false">은은하게</button><button type="button" data-strength="50" aria-pressed="false">보통으로</button><button type="button" data-strength="75" aria-pressed="false">또렷하게</button></div>
+          <p id="strength-note">편집 정도를 뜻해요. 탈모 비율이 아니에요.</p>
+        </div>
+        <div class="preview-provider">
+          <label for="provider">편집 방식</label>
+          <select id="provider"><option value="opencv" disabled>로컬 간단 편집 · 준비 확인 중</option><option value="sd" disabled>로컬 AI 편집 · 설정 필요</option><option value="gemini" disabled>Google AI 편집 · 유료 설정 필요</option></select>
+          <p id="provider-description">편집 가능 여부를 확인하고 있어요.</p>
+          <div class="preview-google-consents" id="google-consents" hidden>
+            <div class="consent-row"><input type="checkbox" id="simulation-consent"><label for="simulation-consent">사진을 Google로 전송하는 데 동의해요<span><a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noreferrer">데이터 이용 안내</a>를 확인해 주세요.</span></label></div>
+            <div class="consent-row"><input type="checkbox" id="paid-consent"><label for="paid-consent">이미지 생성 비용이 발생할 수 있음을 확인했어요</label></div>
+          </div>
+        </div>
+        </div>
+        <div class="preview-settings-actions">
+        <button type="button" class="button primary" id="simulate-button" disabled><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#wand"/></svg><span id="simulate-label">변화 미리보기 만들기</span></button>
+        <p class="preview-private"><svg aria-hidden="true"><use href="/static/icons.svg#shield"/></svg>편집 결과는 계정 기록에 저장되지 않아요</p>
+        <div class="inline-message" id="simulation-message" role="status" aria-live="polite" hidden></div>
+        </div>
+      </section>
+      <section class="panel preview-result" id="preview-result" aria-labelledby="preview-result-title">
+        <div class="preview-result-header"><div><span class="preview-eyebrow">BEFORE &amp; AFTER</span><h2 id="preview-result-title">나란히 살펴보기</h2></div><span class="tag neutral" id="preview-result-state">사진 대기</span></div>
+        <div class="preview-viewbar"><div class="preview-view-modes" role="group" aria-label="비교 방식"><button type="button" data-view="split" aria-pressed="true" disabled><svg aria-hidden="true"><use href="/static/icons.svg#compare"/></svg>슬라이더</button><button type="button" data-view="side" aria-pressed="false" disabled><svg aria-hidden="true"><use href="/static/icons.svg#layers"/></svg>나란히</button></div><button type="button" class="text-button" id="reset-comparison" disabled><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#refresh"/></svg>비교 초기화</button></div>
+        <div class="preview-canvas" id="preview-canvas" aria-busy="false">
+          <div class="preview-empty" id="comparison-empty"><img src="/static/report-octopus.svg" width="360" height="250" alt="" aria-hidden="true"><span>새로운 모습이 궁금한 날</span><h3>한 장으로 시작해 볼까요?</h3><p>사진과 원하는 변화를 선택하면<br>원본과 가상 이미지를 함께 볼 수 있어요.</p></div>
+          <div class="comparison" id="comparison" hidden><img class="compare-before" id="compare-before" alt="편집 전 원본 사진"><img class="compare-after" id="compare-after" alt="가상으로 편집한 모발 모습" hidden><div class="compare-divider" id="compare-divider" hidden><span><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#chevrons"/></svg></span></div><div class="compare-labels" id="compare-labels" hidden><span>원본</span><span>가상 편집</span></div></div>
+          <div class="preview-side-by-side" id="side-comparison" hidden><figure><img id="side-before" alt="나란히 비교하는 원본 사진"><figcaption>원본</figcaption></figure><figure><img id="side-after" alt="나란히 비교하는 가상 편집 사진"><figcaption>가상 편집</figcaption></figure></div>
+          <div class="preview-loading" id="preview-loading" role="status" hidden><div class="async-skeleton async-skeleton-preview" aria-hidden="true"><i class="sk-shape sk-media"></i><i class="sk-shape sk-media"></i></div><strong>가상의 변화를 만들고 있어요</strong><p>완료될 때까지 잠시 기다려 주세요.</p><button type="button" class="text-button" id="cancel-simulation">대기 취소</button></div>
+        </div>
+        <div class="preview-slider-controls" id="slider-controls"><div class="compare-slider-row"><span>원본</span><input type="range" id="compare-slider" min="0" max="100" value="50" aria-label="원본과 가상 편집 비교 위치" aria-describedby="compare-hint" disabled><span>가상 편집</span></div><p id="compare-hint">미리보기가 완성되면 슬라이더로 비교할 수 있어요.</p></div>
+        <div class="preview-result-footer"><div><strong id="result-setting">아직 만든 미리보기가 없어요</strong><p id="simulation-meta">사진을 선택하고 원하는 변화를 만들어 보세요.</p></div><button type="button" class="button secondary" id="download-image" disabled><svg class="icon" aria-hidden="true"><use href="/static/icons.svg#download"/></svg>이미지 저장</button></div>
+        <p class="preview-disclaimer"><svg aria-hidden="true"><use href="/static/icons.svg#info"/></svg>가상의 외형 편집이에요. 실제 탈모 진행이나 치료 결과를 예측하지 않아요.</p>
+      </section>
+    </div>
+    
+  </main>
+  </div>
+  
+  <footer><div class="container footer-inner"><a href="/" class="footer-brand">hairline lab</a><span>오늘의 모습을 이해하는 작은 실험</span><span>사진 기반 참고 도구 · 의료 진단 목적 아님</span></div></footer>
+
+  <dialog id="camera-dialog" class="app-dialog camera-dialog" aria-labelledby="camera-title"><div class="dialog-heading"><h2 id="camera-title">카메라로 촬영하기</h2><button id="camera-close" class="dialog-close" type="button">닫기</button></div><p class="dialog-description">밝은 곳에서 머리 전체가 보이도록 맞춰 주세요. 촬영 전 화면은 서버로 보내지 않아요.</p><div class="camera-view"><video id="camera-video" autoplay playsinline muted aria-label="카메라 미리보기"></video><span class="camera-guide" aria-hidden="true"></span></div><p id="camera-message" role="status" aria-live="polite"></p><div class="camera-actions"><button id="camera-switch" class="button secondary" type="button">전·후면 전환</button><button id="camera-capture" class="button primary" type="button" disabled>촬영하고 불러오기</button></div><p class="camera-footnote">전면 미리보기는 좌우 반전돼요. 편집에는 반전되지 않은 촬영 원본을 사용해요.</p></dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
+
